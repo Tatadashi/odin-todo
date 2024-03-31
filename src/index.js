@@ -1,3 +1,5 @@
+import './style.css';
+
 //non-dom js
 
 
