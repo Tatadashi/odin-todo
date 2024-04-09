@@ -4,4 +4,41 @@
 
 body {
     background-color: aliceblue;
+    min-height: 100vh;
+    display: grid;
+    grid-template:
+        "header header" 1fr
+        "sidebar content" 9fr
+        / 1fr 4fr;
+}
+
+/*split header into muliple pages and title, one page is default(home), one page is attributions , one page is about*/
+
+#header {
+    background-color: cadetblue;
+    grid-area: header;
+    font-weight: bolder;
+    font-size: 8vh;
+    text-align: center;
+}
+
+#sidebar {
+    background-color: aquamarine;
+    grid-area: sidebar;
+}
+
+.project {
+    font-weight: bold;
+    font-size: large;
+}
+
+#content {
+    background-color: bisque;
+    grid-area: content;
+}
+
+#project-title {
+    font-weight: bold;
+    font-size: xx-large;
+    text-align: center;
 }

@@ -1,7 +1,5 @@
 import './style.css';
-
-//non-dom js
-
+//non dom js
 
 class ToDo {
     //will create toDo from form data
