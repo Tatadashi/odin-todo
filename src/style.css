@@ -42,3 +42,11 @@ body {
     font-size: xx-large;
     text-align: center;
 }
+
+#main {
+    background-color: aqua;
+}
+
+.todo {
+    background-color: red;
+}

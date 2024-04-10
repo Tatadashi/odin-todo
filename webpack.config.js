@@ -1,5 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -7,6 +7,7 @@ module.exports = {
     output: {
         filename: 'main.js',
         path: path.resolve(__dirname, 'dist'),
+        assetModuleFilename: 'images/[hash][ext][query]',
     },
     module: {
         rules: [
@@ -14,21 +15,26 @@ module.exports = {
             test: /\.css$/i,
             use: ['style-loader', 'css-loader'],
           },
+          {
+            test: /\.(png|svg|jpg|jpeg|gif)$/i,
+            type: 'asset/resource',
+          },
         ],
     },
     plugins: [
         new HtmlWebpackPlugin({ 
-            title: "Odin ToDo",
-            template: "./src/template.html",
+            title: 'Odin ToDo',
+            template: './src/template.html',
         }),
         new CopyPlugin({
             patterns: [
                 {
-                    from: './src/*.html',
-                    to: path.resolve(__dirname, 'dist'),
+                    from: './*.html',
+                    to: 'htmlCopies',
+                    context: 'src/otherHTML',
                     globOptions: {
                         ignore: [
-                          "**/template.html",
+                          '**/template.html',
                         ],
                       },
                 }
