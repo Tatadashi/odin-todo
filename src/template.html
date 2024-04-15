@@ -7,12 +7,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript"></script>
     <script>
         $(document).ready(function() {
-            $("#content").load('./htmlCopies/todos.html #main');
+            $("#content").load('./htmlCopies/about.html .main');
         });
     </script>
 </head>
 <body>
-    <div id="header">Odin ToDo</div>
+    <div id="header">
+        <h1 id="title">Odin ToDo</h1>
+        <div id="pages">
+            <h2 >Home</h2>
+            <h2 >Attribution</h2>
+            <h2 >About</h2>
+        </div>
+    </div>
     <div id="sidebar">
         <div class="project">Project 1</div>
         <div class="project">Project 2</div>
