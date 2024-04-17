@@ -1,42 +1,49 @@
 import './style.css';
 import './images/checkmark.png';
-//non dom js
+import {setTabOnClickEvent} from './otherJS/setTabOnClickEvent';
 
-class ToDo {
-    //will create toDo from form data
-    constructor (title, description, dueDate, priority, notes) {
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.priority = priority;
-        this.notes = notes;
-    }
+//dom js
+setTabOnClickEvent('about');
+setTabOnClickEvent('attribution');
+setTabOnClickEvent('todos');
 
-    changeProperty (property, newInfo) {
-        this[property] = newInfo;
-    }
-}
+// //non dom js
 
-class Project {
-    constructor (title, toDoList) {
-        this.title = title;
-        this.toDoList = toDoList;
-    }
+// class ToDo {
+//     //will create toDo from form data
+//     constructor (title, description, dueDate, priority, notes) {
+//         this.title = title;
+//         this.description = description;
+//         this.dueDate = dueDate;
+//         this.priority = priority;
+//         this.notes = notes;
+//     }
 
-    changeProperty (property, newInfo) {
-        this[property] = newInfo;
-    }
-}
+//     changeProperty (property, newInfo) {
+//         this[property] = newInfo;
+//     }
+// }
 
-const item1 = new ToDo('clean', 'cleaning', '12/02/2004', 'high', 'room');
-const item2 = new ToDo('hw', 'solving', '11/03/2013', 'low', 'math');
+// class Project {
+//     constructor (title, toDoList) {
+//         this.title = title;
+//         this.toDoList = toDoList;
+//     }
 
-item1.changeProperty('description', 'jon');
+//     changeProperty (property, newInfo) {
+//         this[property] = newInfo;
+//     }
+// }
 
-const list = [item1, item2];
+// const item1 = new ToDo('clean', 'cleaning', '12/02/2004', 'high', 'room');
+// const item2 = new ToDo('hw', 'solving', '11/03/2013', 'low', 'math');
 
-const project = new Project('school', list);
+// item1.changeProperty('description', 'jon');
 
-project.changeProperty('title', 'college');
+// const list = [item1, item2];
 
-console.log(project);
+// const project = new Project('school', list);
+
+// project.changeProperty('title', 'college');
+
+// console.log(project);
