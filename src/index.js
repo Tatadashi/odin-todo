@@ -1,5 +1,5 @@
 import './style.css';
-import './images/icon.png';
+import './images/checkmark.png';
 //non dom js
 
 class ToDo {

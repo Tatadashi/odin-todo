@@ -58,6 +58,12 @@ body {
     padding: 50px;
 }
 
+#attribution {
+    background-color: lightgray;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
 .main {
     background-color: aqua;
     height: 100%;
