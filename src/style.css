@@ -30,6 +30,8 @@ body {
 #sidebar {
     background-color: aquamarine;
     grid-area: sidebar;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
 .project {
