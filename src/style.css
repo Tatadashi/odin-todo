@@ -42,10 +42,8 @@ body {
     grid-area: content;
 }
 
-#project-title {
-    font-weight: bold;
-    font-size: large;
-    text-align: center;
+.main {
+    height: 100%;
 }
 
 #about {
@@ -64,11 +62,14 @@ body {
     padding: 20px;
 }
 
-.main {
-    background-color: aqua;
-    height: 100%;
+#todos {
+    background-color: lavenderblush;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
-.todo {
-    background-color: red;
+#project-title {
+    font-weight: bold;
+    font-size: x-large;
+    text-align: center;
 }
