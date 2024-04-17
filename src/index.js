@@ -1,11 +1,10 @@
 import './style.css';
 import './images/checkmark.png';
-import {setTabOnClickEvent} from './otherJS/setTabOnClickEvent';
+import {setAllTabOnClickEvents} from './otherJS/setAllTabOnClickEvents';
 
 //dom js
-setTabOnClickEvent('about');
-setTabOnClickEvent('attribution');
-setTabOnClickEvent('todos');
+
+setAllTabOnClickEvents();
 
 // //non dom js
 
