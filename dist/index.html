@@ -11,16 +11,16 @@
         <form>
             <div>
                 <h2>Add New Todo</h2>
-                <button type="button" aria-label="close" id="close" formnovalidate>X</button>
+                <button type="button" aria-label="close" id="close">X</button>
             </div>
             <p>
-                <label>Name of Todo:
-                    <input type="text" name="name" required>
+                <label for="todo-name-input">Name of Todo:
+                    <input type="text" name="name" id="todo-name-input" required>
                 </label>
             </p>
             <p>
-                <label>For Which Project?
-                    <select name="project">
+                <label for="project-list">For Which Project?
+                    <select name="project" id="project-list">
                         <option value="one">Project 1</option>
                         <option value="two">Project 2</option>
                     </select>
