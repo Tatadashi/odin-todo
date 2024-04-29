@@ -1,4 +1,8 @@
-import {loadTabHtml} from "./loadTabHtml";
+function loadTabHtml (tabName) {
+    $(document).ready(function() {
+        $("#content").load(`./htmlCopies/${tabName}.html .main`);
+     });
+}
 
 function setAllTabOnClickEvents () {
     const tabs = document.querySelectorAll('.tab');
@@ -9,5 +13,5 @@ function setAllTabOnClickEvents () {
         });
     });
 }
-//go thru all class tabs, 
+
 export {setAllTabOnClickEvents};

@@ -4,12 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript" defer></script>
-    <script>
-        $(document).ready(function() {
-            $("#content").load('./htmlCopies/todos.html .main');
-        });
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
     <dialog id="dialog">
@@ -54,6 +49,11 @@
         </div>
     </div>
     <div id="content">
+        <script>
+            $(document).ready(function() {
+                $("#content").load('./htmlCopies/todos.html .main');
+            });
+        </script>
     </div>
 </body>
 </html>

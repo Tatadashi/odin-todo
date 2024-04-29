@@ -1,3 +1,59 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Odin ToDo</title><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer="defer"></script><script>$(document).ready(function() {
-            $("#content").load('./htmlCopies/todos.html .main');
-        });</script><script defer="defer" src="main.js"></script></head><body><dialog id="dialog"><form><div><h2>Add New Todo</h2><button type="button" aria-label="close" id="close" formnovalidate>X</button></div><p><label>Name of Todo: <input name="name" required></label></p><p><label>For Which Project <select name="project"><option value="one">Project 1</option><option value="two">Project 2</option></select></label></p><p><button type="submit" id="form-submit">Add</button></p></form></dialog><div id="header"><h1 id="title">Odin ToDo</h1><div id="pages"><h2 class="tab">Todos</h2><h2 class="tab">Attribution</h2><h2 class="tab">About</h2></div></div><div id="sidebar"><div><div class="project">Project 1</div><div class="project">Project 2</div></div><div><button id="add-todo">Add Todo</button></div></div><div id="content"></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odin ToDo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script defer src="main.js"></script></head>
+<body>
+    <dialog id="dialog">
+        <form>
+            <div>
+                <h2>Add New Todo</h2>
+                <button type="button" aria-label="close" id="close" formnovalidate>X</button>
+            </div>
+            <p>
+                <label>Name of Todo:
+                    <input type="text" name="name" required>
+                </label>
+            </p>
+            <p>
+                <label>For Which Project?
+                    <select name="project">
+                        <option value="one">Project 1</option>
+                        <option value="two">Project 2</option>
+                    </select>
+                </label>
+            </p>
+            <p>
+                <button type="submit" id="form-submit">Add</button>
+            </p>
+        </form>
+    </dialog>
+    <div id="header">
+        <h1 id="title">Odin ToDo</h1>
+        <div id="pages">
+            <h2 class="tab">Todos</h2>
+            <h2 class="tab">Attribution</h2>
+            <h2 class="tab">About</h2>
+        </div>
+    </div>
+    <div id="sidebar">
+        <div>  
+            <div class="project">Project 1</div>
+            <div class="project">Project 2</div>
+        </div>
+        <div>
+            <button id="add-todo">Add Todo</button>
+        </div>
+    </div>
+    <div id="content">
+        <script>
+            $(document).ready(function() {
+                $("#content").load('./htmlCopies/todos.html .main');
+            });
+        </script>
+    </div>
+</body>
+</html>

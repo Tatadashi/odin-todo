@@ -1,33 +1,8 @@
 import './style.css';
 import './images/checkmark.png';
-import {setAllTabOnClickEvents} from './otherJS/setAllTabOnClickEvents';
+import {setDOMEvents} from './otherJS/DOM';
 
-//dom js
-
-setAllTabOnClickEvents();
-
-const todoModal = document.getElementById('add-todo');
-todoModal.addEventListener('click', (e) => {
-    form.reset();
-    dialog.showModal();
-})
-
-const form = document.querySelector(`form`);
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const name = formData.get('name');
-    const project = formData.get('project');
-
-    dialog.close();
-});
-
-const closeModalButton = document.getElementById(`close`);
-closeModalButton.addEventListener(`click`, (e) => {
-    dialog.close();
-});
-
-// //non dom js
+setDOMEvents();
 
 // class ToDo {
 //     //will create toDo from form data
