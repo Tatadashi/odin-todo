@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript" defer></script>
     <script>
         $(document).ready(function() {
             $("#content").load('./htmlCopies/todos.html .main');
@@ -12,6 +12,30 @@
     </script>
 </head>
 <body>
+    <dialog id="dialog">
+        <form>
+            <div>
+                <h2>Add New Todo</h2>
+                <button type="button" aria-label="close" id="close" formnovalidate>X</button>
+            </div>
+            <p>
+                <label>Name of Todo:
+                    <input type="text" name="name" required>
+                </label>
+            </p>
+            <p>
+                <label>For Which Project?
+                    <select name="project">
+                        <option value="one">Project 1</option>
+                        <option value="two">Project 2</option>
+                    </select>
+                </label>
+            </p>
+            <p>
+                <button type="submit" id="form-submit">Add</button>
+            </p>
+        </form>
+    </dialog>
     <div id="header">
         <h1 id="title">Odin ToDo</h1>
         <div id="pages">
@@ -21,8 +45,13 @@
         </div>
     </div>
     <div id="sidebar">
-        <div class="project">Project 1</div>
-        <div class="project">Project 2</div>
+        <div>  
+            <div class="project">Project 1</div>
+            <div class="project">Project 2</div>
+        </div>
+        <div>
+            <button id="add-todo">Add Todo</button>
+        </div>
     </div>
     <div id="content">
     </div>
