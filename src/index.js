@@ -1,24 +1,8 @@
 import './style.css';
 import './images/checkmark.png';
-import {setDOMEvents} from './otherJS/DOM';
+import {setDOMEvents, updateSidebar, updateContent} from './otherJS/DOM';
 
 setDOMEvents();
-
-function updateSidebar (projectList) {
-    //first child of #sidebar is where projects located
-    const sidebarProjects = document.getElementById('sidebar').children[0];
-    sidebarProjects.innerHTML = '';
-    
-    projectList.forEach(project => {
-        const projectDiv = document.createElement('div');
-        projectDiv.classList.add('project')
-        projectDiv.innerHTML = project.title;
-        // project.toDoList.forEach(todo => {
-        //     //code with content todo names
-        // });
-        sidebarProjects.appendChild(projectDiv);
-    });
-}
 
 class ToDo {
     //will create toDo from form data
@@ -36,9 +20,9 @@ class ToDo {
 }
 
 class Project {
-    constructor (title, toDoList) {
+    constructor (title, todoList) {
         this.title = title;
-        this.toDoList = toDoList;
+        this.todoList = todoList;
     }
 
     changeProperty (property, newInfo) {
@@ -55,8 +39,7 @@ const project2 = new Project('home', todoList);
 const projectList = [project1, project2];
 
 updateSidebar(projectList);
+updateContent(project1);
 
 // project.changeProperty('title', 'college');
 // item1.changeProperty('description', 'jon');
-
-// console.log(project);
