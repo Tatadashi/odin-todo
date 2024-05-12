@@ -1,3 +1,5 @@
+import { projectList } from "./default";
+
 function setCloseModalOnClick () {
     const closeModalButton = document.getElementById(`close`);
     closeModalButton.addEventListener(`click`, (e) => {
@@ -11,6 +13,20 @@ function setOpenModalOnClick () {
     todoModal.addEventListener('click', (e) => {
         form.reset();
         dialog.showModal();
+        updateProjectDropdown(projectList);
+    });
+}
+
+function updateProjectDropdown (projectList) {
+    const dropdown = document.getElementById('project-list');
+    dropdown.innerHTML = '';
+
+    projectList.forEach(project => {
+        const option = document.createElement('option');
+        option.value = project.title;
+        option.innerHTML = project.title;
+
+        dropdown.appendChild(option);
     });
 }
 
