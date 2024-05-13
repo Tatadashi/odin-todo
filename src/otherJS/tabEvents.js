@@ -1,6 +1,13 @@
+import { updateContent } from './DOM';
+import { project1 } from './default';
+
 function loadTabHtml (tabName) {
     $(document).ready(function() {
-        $("#content").load(`./htmlCopies/${tabName}.html .main`);
+        $("#content").load(`./htmlCopies/${tabName}.html .main`, function() {
+            if (tabName == 'todos') {
+                updateContent(project1);
+            }
+        });
      });
 }
 
@@ -14,4 +21,4 @@ function setAllTabOnClickEvents () {
     });
 }
 
-export {setAllTabOnClickEvents};
+export { setAllTabOnClickEvents };

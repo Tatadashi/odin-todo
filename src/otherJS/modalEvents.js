@@ -49,4 +49,4 @@ function setAllModalEvents () {
     setModalSubmit();
 }
 
-export {setAllModalEvents};
+export { setAllModalEvents };

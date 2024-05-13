@@ -1,5 +1,5 @@
-import {setAllTabOnClickEvents} from './tabEvents';
-import {setAllModalEvents} from './modalEvents';
+import { setAllTabOnClickEvents } from './tabEvents';
+import { setAllModalEvents } from './modalEvents';
 
 function setDOMEvents () {
     setAllTabOnClickEvents();
@@ -41,4 +41,4 @@ function updateContent (project) {
 
 }
 
-export {setDOMEvents, updateSidebar, updateContent};
+export { setDOMEvents, updateSidebar, updateContent };
