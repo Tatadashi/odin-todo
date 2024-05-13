@@ -1,6 +1,7 @@
 import { setAllTabOnClickEvents, loadTabHtml } from './tabEvents';
 import { setAllModalEvents } from './modalEvents';
 
+//modal and tab events
 function setDOMEvents () {
     setAllTabOnClickEvents();
     setAllModalEvents();

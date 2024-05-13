@@ -1,3 +1,5 @@
+import { updateSidebar } from "./DOM";
+
 class ToDo {
     //will create toDo from form data
     constructor (title, description, dueDate, priority, notes) {
@@ -33,6 +35,8 @@ const todoList2 = [item1, item3];
 const project1 = new Project('school', todoList);
 const project2 = new Project('home', todoList2);
 const projectList = [project1, project2];
+
+updateSidebar(projectList);
 
 export {projectList, project1};
 
