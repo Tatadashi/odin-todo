@@ -1,4 +1,4 @@
-import { setAllTabOnClickEvents } from './tabEvents';
+import { setAllTabOnClickEvents, loadTabHtml } from './tabEvents';
 import { setAllModalEvents } from './modalEvents';
 
 function setDOMEvents () {
@@ -6,7 +6,7 @@ function setDOMEvents () {
     setAllModalEvents();
 }
 
-//Update sidebar DOM to include all projects in given list
+//Update sidebar DOM to include all projects in given list with on click event to show content
 function updateSidebar (projectList) {
     //first child of #sidebar is where projects located
     const sidebarProjects = document.getElementById('sidebar').children[0];
@@ -16,6 +16,10 @@ function updateSidebar (projectList) {
         const projectDiv = document.createElement('div');
         projectDiv.classList.add('project')
         projectDiv.textContent = project.title;
+
+        projectDiv.addEventListener('click', (e) => {
+            loadTabHtml('todos', project)
+        });
        
         sidebarProjects.appendChild(projectDiv);
     });

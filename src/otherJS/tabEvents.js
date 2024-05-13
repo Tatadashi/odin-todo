@@ -1,11 +1,13 @@
 import { updateContent } from './DOM';
 import { project1 } from './default';
 
-function loadTabHtml (tabName) {
+//project1 = default
+function loadTabHtml (tabName, project=project1) {
     $(document).ready(function() {
         $("#content").load(`./htmlCopies/${tabName}.html .main`, function() {
+            //isDirect is boolean for if clicked directly for project (sidebar) or just the tab
             if (tabName == 'todos') {
-                updateContent(project1);
+                updateContent(project);
             }
         });
      });
@@ -21,4 +23,4 @@ function setAllTabOnClickEvents () {
     });
 }
 
-export { setAllTabOnClickEvents };
+export { setAllTabOnClickEvents, loadTabHtml };
