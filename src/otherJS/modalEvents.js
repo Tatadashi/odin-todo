@@ -1,4 +1,6 @@
 import { projectList } from "./default";
+import { loadTabHtml } from "./tabEvents";
+import { addTodo } from "./DOM";
 
 function setCloseModalOnClick () {
     const closeModalButton = document.getElementById(`close`);
@@ -33,11 +35,15 @@ function updateProjectDropdown (projectList) {
 function setModalSubmit () {
     const form = document.querySelector('form');
     form.addEventListener('submit', (e) => {
-        //prob another function
         e.preventDefault();
+
+        //prob another function
         const formData = new FormData(form);
         const name = formData.get('name');
         const project = formData.get('project');
+
+        addTodo(name, project);
+        loadTabHtml('todos', project);
 
         dialog.close();
     });

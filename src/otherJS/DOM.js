@@ -1,5 +1,6 @@
 import { setAllTabOnClickEvents, loadTabHtml } from './tabEvents';
 import { setAllModalEvents } from './modalEvents';
+import { Todo, projectList } from './default';
 
 //modal and tab events
 function setDOMEvents () {
@@ -19,7 +20,7 @@ function updateSidebar (projectList) {
         projectDiv.textContent = project.title;
 
         projectDiv.addEventListener('click', (e) => {
-            loadTabHtml('todos', project)
+            loadTabHtml('todos', project.title)
         });
        
         sidebarProjects.appendChild(projectDiv);
@@ -27,7 +28,9 @@ function updateSidebar (projectList) {
 }
 
 //Update content of todos tab to contain info of given project and its' todos 
-function updateContent (project) {
+function updateContent (projectName) {
+    const project = findProjectFromListByName(projectName, projectList);
+
     const projectTitle = document.getElementById('project-title');
     projectTitle.textContent = project.title;
 
@@ -46,4 +49,26 @@ function updateContent (project) {
 
 }
 
-export { setDOMEvents, updateSidebar, updateContent };
+function findProjectFromListByName (projectName, list) {
+    let chosenProject;
+    projectList.forEach(project => {
+        if (project.title == projectName) {
+            chosenProject = project;
+        }
+    });
+
+    return chosenProject;
+}
+
+function addTodo (todoName, projectName) {
+    const newTodo = new Todo(todoName, 'default descrip', 'default due date', 'default prio', 'default note')
+
+    const chosenProject = findProjectFromListByName(projectName, projectList);
+
+    let newTodoList = chosenProject.todoList;
+    newTodoList.push(newTodo);
+
+    chosenProject.changeProperty('todoList', newTodoList);    
+}
+
+export { setDOMEvents, updateSidebar, updateContent, addTodo };
