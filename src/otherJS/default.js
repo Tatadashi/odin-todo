@@ -16,7 +16,7 @@ class Todo {
 }
 
 class Project {
-    constructor (title, todoList) {
+    constructor (title, todoList = []) {
         this.title = title;
         this.todoList = todoList;
     }
@@ -43,7 +43,7 @@ const projectList = [project1, project2];
 
 updateSidebar(projectList);
 
-export {projectList, project1, Todo};
+export {projectList, project1, Todo, Project};
 
 // project.changeProperty('title', 'college');
 // item1.changeProperty('description', 'jon');

@@ -1,6 +1,7 @@
 import { setAllTabOnClickEvents, loadTabHtml } from './tabEvents';
 import { setAllModalEvents } from './modalEvents';
-import { Todo, projectList } from './default';
+import { projectList } from './default';
+import { findProjectFromListByName } from './nonDOM';
 
 //modal and tab events
 function setDOMEvents () {
@@ -49,26 +50,4 @@ function updateContent (projectName) {
 
 }
 
-function findProjectFromListByName (projectName, list) {
-    let chosenProject;
-    projectList.forEach(project => {
-        if (project.title == projectName) {
-            chosenProject = project;
-        }
-    });
-
-    return chosenProject;
-}
-
-function addTodo (todoName, projectName) {
-    const newTodo = new Todo(todoName, 'default descrip', 'default due date', 'default prio', 'default note')
-
-    const chosenProject = findProjectFromListByName(projectName, projectList);
-
-    let newTodoList = chosenProject.todoList;
-    newTodoList.push(newTodo);
-
-    chosenProject.changeProperty('todoList', newTodoList);    
-}
-
-export { setDOMEvents, updateSidebar, updateContent, addTodo };
+export { setDOMEvents, updateSidebar, updateContent };

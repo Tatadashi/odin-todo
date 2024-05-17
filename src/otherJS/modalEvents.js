@@ -1,43 +1,37 @@
 import { projectList } from "./default";
 import { loadTabHtml } from "./tabEvents";
-import { addTodo } from "./DOM";
+import { updateProjectDropdown, addProject, addTodo } from "./form";
 
-function setCloseModalOnClick () {
-    const closeModalButton = document.getElementById(`close`);
-    closeModalButton.addEventListener(`click`, (e) => {
-        dialog.close();
+function setAllCloseModalOnClick () {
+    const closeModalButtons = document.querySelectorAll('.close');
+    closeModalButtons.forEach(button => {
+        button.addEventListener(`click`, (e) => {
+            dialog.close();
+        });
     });
 }
 
-function setOpenModalOnClick () {
-    const form = document.querySelector('form');
-    const todoModal = document.getElementById('add-todo');
-    todoModal.addEventListener('click', (e) => {
+function setOpenModalOnClick (button) {
+    button.addEventListener('click', (e) => {
+        const formID = button.id + '-form';
+        const form = document.getElementById(formID);
         form.reset();
         dialog.showModal();
         updateProjectDropdown(projectList);
     });
 }
 
-function updateProjectDropdown (projectList) {
-    const dropdown = document.getElementById('project-list');
-    dropdown.innerHTML = '';
-
-    projectList.forEach(project => {
-        const option = document.createElement('option');
-        option.value = project.title;
-        option.innerHTML = project.title;
-
-        dropdown.appendChild(option);
+function setAllOpenModalOnClick () {
+    const dialogButtons = document.querySelectorAll('.dialog-button');
+    dialogButtons.forEach(button => {
+        setOpenModalOnClick(button);
     });
 }
 
-function setModalSubmit () {
-    const form = document.querySelector('form');
+function setAddTodoModalSubmit (form) {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        //prob another function
         const formData = new FormData(form);
         const name = formData.get('name');
         const project = formData.get('project');
@@ -49,10 +43,32 @@ function setModalSubmit () {
     });
 }
 
+function setAddProjectModalSubmit (form) {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const name = formData.get('name');
+
+        addProject(name);
+        loadTabHtml('todos', name);
+
+        dialog.close();
+    });
+}
+
+function setAllModalSubmit () {
+    const addTodoForm = document.getElementById('add-todo-form');
+    setAddTodoModalSubmit(addTodoForm);
+
+    const addProjectForm = document.getElementById('add-project-form');
+    setAddProjectModalSubmit(addProjectForm);
+}
+
 function setAllModalEvents () {
-    setCloseModalOnClick();
-    setOpenModalOnClick();
-    setModalSubmit();
+    setAllCloseModalOnClick();
+    setAllOpenModalOnClick();
+    setAllModalSubmit();
 }
 
 export { setAllModalEvents };
