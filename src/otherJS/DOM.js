@@ -2,11 +2,13 @@ import { setAllTabOnClickEvents, loadTabHtml } from './tabEvents';
 import { setAllModalEvents } from './modalEvents';
 import { projectList } from './default';
 import { findProjectFromListByName } from './nonDOM';
+import { setAllFormEvents } from './form';
 
 //modal and tab events
 function setDOMEvents () {
     setAllTabOnClickEvents();
     setAllModalEvents();
+    setAllFormEvents();
 }
 
 //Update sidebar DOM to include all projects in given list with on click event to show content

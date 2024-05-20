@@ -1,6 +1,5 @@
-import { projectList } from "./default";
 import { loadTabHtml } from "./tabEvents";
-import { updateProjectDropdown, addProject, addTodo } from "./form";
+import { updateAllProjectDropdowns, addProject, addTodo } from "./form";
 
 function setAllCloseModalOnClick () {
     const closeModalButtons = document.querySelectorAll('.close');
@@ -17,7 +16,7 @@ function setOpenModalOnClick (button) {
         const form = document.getElementById(formID);
         form.reset();
         dialog.showModal();
-        updateProjectDropdown(projectList);
+        updateAllProjectDropdowns();
     });
 }
 
@@ -56,6 +55,8 @@ function setAddProjectModalSubmit (form) {
         dialog.close();
     });
 }
+
+//deletefunctionsubmit
 
 function setAllModalSubmit () {
     const addTodoForm = document.getElementById('add-todo-form');
