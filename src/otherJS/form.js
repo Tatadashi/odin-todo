@@ -1,7 +1,6 @@
-import { projectList, Todo, Project } from "./default";
-import { findProjectFromListByName } from "./nonDOM";
-import { updateSidebar } from "./DOM";
-import { project1 } from "./default";
+import { projectList } from "./default";
+import { findItemFromListByName } from "./nonDOM";
+import { defaultProject } from "./default";
 
 //show form being clicked, hide other 2 forms
 function setFormButtons () {
@@ -47,6 +46,7 @@ function checkDeleteType (value) {
 
 function showTodos () {
     $('#modify-todo-question').show();
+    updateTodoDropdown(defaultProject.title);
 }
 
 function hideTodos () {
@@ -60,9 +60,6 @@ function setDeleteFormEvents () {
 
 function setProjectDropdownEvent () {
     const dropdown = document.getElementById('modify-project');
-
-    //default todoDropdown
-    updateTodoDropdown(project1.title);
     
     dropdown.addEventListener('change', (e) => {
         updateTodoDropdown(dropdown.value)
@@ -77,7 +74,7 @@ function setDeleteTypeDropdownEvent () {
 }
 
 function updateTodoDropdown (projectName) {
-    const project = findProjectFromListByName(projectName, projectList);
+    const project = findItemFromListByName(projectName, projectList);
     const projectTodos = project.todoList;
     const dropdown = document.getElementById('modify-todo');
     
@@ -96,21 +93,4 @@ function fillDropdownWithList (dropdown, list) {
     });
 }
 
-function addTodo (todoName, projectName) {
-    const newTodo = new Todo(todoName, 'default descrip', 'default due date', 'default prio', 'default note')
-
-    const chosenProject = findProjectFromListByName(projectName, projectList);
-
-    let newTodoList = chosenProject.todoList;
-    newTodoList.push(newTodo);
-
-    chosenProject.changeProperty('todoList', newTodoList);    
-}
-
-function addProject (projectName) {
-    const newProject = new Project(projectName);
-    projectList.push(newProject);
-    updateSidebar(projectList);
-}
-
-export { updateAllProjectDropdowns, addTodo, addProject, setAllFormEvents };
+export { updateAllProjectDropdowns, setAllFormEvents, updateTodoDropdown, showTodos };

@@ -32,18 +32,19 @@ const item2 = new Todo('hw', 'solving', '11/03/2013', 'low', 'math');
 const item3 = new Todo('game', 'gaming', '01/13/2029', 'max', 'fun');
 const todoList = [item1, item2];
 const todoList2 = [item1, item3];
-const project1 = new Project('school', todoList);
+const defaultProject = new Project('school', todoList);
 const project2 = new Project('home', todoList2);
+const project3 = new Project('stuff', todoList2);
 
 //test change todoList
 const todoList3 = [item3, item2];
 project2.changeProperty('todoList', todoList3);
 
-const projectList = [project1, project2];
+const projectList = [defaultProject, project2, project3];
 
 updateSidebar(projectList);
 
-export {projectList, project1, Todo, Project};
+export {projectList, defaultProject, Todo, Project};
 
 // project.changeProperty('title', 'college');
 // item1.changeProperty('description', 'jon');

@@ -15,12 +15,12 @@
             </div>
             <p>
                 <label for="todo-name-input">Name of Todo:
-                    <input type="text" name="name" id="todo-name-input" required>
+                    <input type="text" name="name" id="todo-name-input" autocomplete="off" required>
                 </label>
             </p>
             <p>
-                <label for="project-list">For Which Project?
-                    <select name="projects" class="project-list">
+                <label for="project-list-add">For Which Project?
+                    <select name="projects" class="project-list" id="project-list-add">
                         <option value="one">Project 1</option>
                         <option value="two">Project 2</option>
                     </select>
@@ -37,7 +37,7 @@
             </div>
             <p>
                 <label for="project-name-input">Name of Project:
-                    <input type="text" name="name" id="project-name-input" required>
+                    <input type="text" name="name" id="project-name-input" autocomplete="off" required>
                 </label>
             </p>
             <p>
@@ -58,7 +58,7 @@
                 </label>
             </p>
             <p>
-                <label for="project-list">Which project being modified?
+                <label for="modify-project">Which project being modified?
                     <select name="projects" class="project-list" id="modify-project">
                         <option value="one">Project 1</option>
                         <option value="two">Project 2</option>

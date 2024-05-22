@@ -1,7 +1,7 @@
 import { setAllTabOnClickEvents, loadTabHtml } from './tabEvents';
 import { setAllModalEvents } from './modalEvents';
 import { projectList } from './default';
-import { findProjectFromListByName } from './nonDOM';
+import { findItemFromListByName } from './nonDOM';
 import { setAllFormEvents } from './form';
 
 //modal and tab events
@@ -32,7 +32,7 @@ function updateSidebar (projectList) {
 
 //Update content of todos tab to contain info of given project and its' todos 
 function updateContent (projectName) {
-    const project = findProjectFromListByName(projectName, projectList);
+    const project = findItemFromListByName(projectName, projectList);
 
     const projectTitle = document.getElementById('project-title');
     projectTitle.textContent = project.title;

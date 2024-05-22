@@ -1,8 +1,7 @@
 import { updateContent } from './DOM';
-import { project1 } from './default';
+import { defaultProject } from './default';
 
-//project1 = default
-function loadTabHtml (tabName, projectName=project1.title) {
+function loadTabHtml (tabName, projectName=defaultProject.title) {
     $(document).ready(function() {
         $("#content").load(`./htmlCopies/${tabName}.html .main`, function() {
             //isDirect is boolean for if clicked directly for project (sidebar) or just the tab
