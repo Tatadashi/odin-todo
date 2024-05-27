@@ -3,3 +3,4 @@ import './images/checkmark.png';
 import { setDOMEvents } from './otherJS/DOM';
 
 setDOMEvents();
+eep.close();

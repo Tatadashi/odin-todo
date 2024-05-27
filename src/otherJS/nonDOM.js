@@ -11,10 +11,10 @@ function findItemFromListByName (itemName, list) {
     return chosenItem;
 }
 
-function addTodo (todoName, projectName) {
-    const newTodo = new Todo(todoName, 'default descrip', 'default due date', 'default prio', 'default note');
+function addTodo (projectName, todoName, description, dueDate, priority, note) {
+    const newTodo = new Todo(todoName, description, dueDate, priority, note);
 
-    const chosenProject = findFromListByName(projectName, projectList);
+    const chosenProject = findItemFromListByName(projectName, projectList);
 
     let newTodoList = chosenProject.todoList;
     newTodoList.push(newTodo);

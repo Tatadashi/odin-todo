@@ -8,12 +8,12 @@ function setAllCloseModalOnClick () {
     const closeModalButtons = document.querySelectorAll('.close');
     closeModalButtons.forEach(button => {
         button.addEventListener(`click`, (e) => {
-            dialog.close();
+            dialogSidebar.close();
         });
     });
 }
 
-function setOpenModalOnClick (button) {
+function setSidebarOpenModalOnClick (button) {
     button.addEventListener('click', (e) => {
         const formID = button.id + '-form';
         const form = document.getElementById(formID);
@@ -25,10 +25,23 @@ function setOpenModalOnClick (button) {
     });
 }
 
-function setAllOpenModalOnClick () {
-    const dialogButtons = document.querySelectorAll('.dialog-button');
+function setTodoOpenModalOnClick (button) {
+    button.addEventListener('click', (e) => {
+        eep.showModal();
+    });
+}
+
+function setAllTodoOpenModalOnClick () {
+    const dialogButtons = document.querySelectorAll('.todo-info-button');
     dialogButtons.forEach(button => {
-        setOpenModalOnClick(button);
+        setTodoOpenModalOnClick(button);
+    });
+}
+
+function setAllSidebarOpenModalOnClick () {
+    const dialogButtons = document.querySelectorAll('.sidebar-dialog-button');
+    dialogButtons.forEach(button => {
+        setSidebarOpenModalOnClick(button);
     });
 }
 
@@ -37,13 +50,17 @@ function setAddTodoModalSubmit (form) {
         e.preventDefault();
 
         const formData = new FormData(form);
-        const name = formData.get('name');
         const project = formData.get('projects');
+        const name = formData.get('name');
+        const description = formData.get('description');
+        const date = formData.get('due-date');
+        const priority = formData.get('priority-level');
+        const notes = formData.get('note');
 
-        addTodo(name, project);
+        addTodo(project, name, description, date, priority, notes);
         loadTabHtml('todos', project);
 
-        dialog.close();
+        dialogSidebar.close();
     });
 }
 
@@ -58,7 +75,7 @@ function setAddProjectModalSubmit (form) {
         loadTabHtml('todos', name);
         updateSidebar(projectList);
 
-        dialog.close();
+        dialogSidebar.close();
     });
 }
 
@@ -81,7 +98,7 @@ function setDeleteModalSubmit (form) {
             updateSidebar(projectList);
         }
 
-        dialog.close();
+        dialogSidebar.close();
     });
 }
 
@@ -98,8 +115,8 @@ function setAllModalSubmit () {
 
 function setAllModalEvents () {
     setAllCloseModalOnClick();
-    setAllOpenModalOnClick();
+    setAllSidebarOpenModalOnClick();
     setAllModalSubmit();
 }
 
-export { setAllModalEvents };
+export { setAllModalEvents, setAllTodoOpenModalOnClick };

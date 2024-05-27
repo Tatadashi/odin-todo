@@ -1,12 +1,13 @@
 import { updateContent } from './DOM';
 import { defaultProject } from './default';
+import { setAllTodoOpenModalOnClick } from './modalEvents';
 
 function loadTabHtml (tabName, projectName=defaultProject.title) {
     $(document).ready(function() {
         $("#content").load(`./htmlCopies/${tabName}.html .main`, function() {
-            //isDirect is boolean for if clicked directly for project (sidebar) or just the tab
             if (tabName == 'todos') {
                 updateContent(projectName);
+                setAllTodoOpenModalOnClick();
             }
         });
      });

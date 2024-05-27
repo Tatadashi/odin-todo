@@ -45,11 +45,11 @@ function updateContent (projectName) {
     project.todoList.forEach(todo => {
         const todoItem = document.createElement('li');
         todoItem.textContent = todo.title;
+        todoItem.classList.add('todo-info-button');
         projectTodos.appendChild(todoItem);
     });
 
     projectTodosDiv.appendChild(projectTodos);
-
 }
 
 export { setDOMEvents, updateSidebar, updateContent };
