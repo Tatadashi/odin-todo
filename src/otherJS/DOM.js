@@ -45,6 +45,7 @@ function updateContent (projectName) {
     project.todoList.forEach(todo => {
         const todoItem = document.createElement('li');
         todoItem.textContent = todo.title;
+        todoItem.dataset.modal = 'todo-info';
         todoItem.classList.add('todo-info-button');
         projectTodos.appendChild(todoItem);
     });

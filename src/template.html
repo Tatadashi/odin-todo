@@ -7,11 +7,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-    <dialog id="dialog">
-        <form id="add-todo-form">
+    <dialog class="modal" id="add-todo">
+        <form method="dialog" id="add-todo-form">
             <div>
                 <h2>Add New Todo</h2>
-                <button type="button" aria-label="close" class="close">X</button>
+                <button type="button" formmethod="dialog" aria-label="close" class="close">X</button>
             </div>
             <p>
                 <label for="todo-name-input">Name of Todo:
@@ -56,10 +56,12 @@
                 <button type="submit" id="form-submit">Add</button>
             </p>
         </form>
-        <form id="add-project-form">
+    </dialog>
+    <dialog class="modal" id="add-project">
+        <form method="dialog" id="add-project-form">
             <div>
                 <h2>Add New Project</h2>
-                <button type="button" aria-label="close" class="close">X</button>
+                <button type="button" formmethod="dialog" aria-label="close" class="close">X</button>
             </div>
             <p>
                 <label for="project-name-input">Name of Project:
@@ -70,10 +72,12 @@
                 <button type="submit" id="form-submit">Add</button>
             </p>
         </form>
-        <form id="delete-form">
+    </dialog>
+    <dialog class="modal" id="delete">
+        <form method="dialog" id="delete-form">
             <div>
                 <h2>Delete Todo or Project</h2>
-                <button type="button" aria-label="close" class="close">X</button>
+                <button type="button" formmethod="dialog" aria-label="close" class="close">X</button>
             </div>
             <p>
                 <label for="delete-type">Deleting which type (todo or project)?
@@ -104,30 +108,30 @@
             </p>
         </form>     
     </dialog>
-    <dialog id="eep">
-        <form id="todo-info">
+    <dialog class="modal" id="todo-info">
+        <form method="dialog" id="todo-info">
             <div>
                 <h2>Todo Info</h2>
-                <button type="button" aria-label="close" class="close">X</button>
+                <button type="button" formmethod="dialog" aria-label="close" class="close">X</button>
             </div>
             <div>
-                <h2>Name:</h2>
+                <h4>Name:</h4>
                 <p id="todo-name">Todo Name</p>
             </div>
             <div>
-                <h2>Description:</h2>
+                <h4>Description:</h4>
                 <p id="todo-description">Todo Description</p>
             </div>
             <div>
-                <h2>Due Date:</h2>
+                <h4>Due Date:</h4>
                 <p id="todo-due-date">Todo Due Date</p>
             </div>
             <div>
-                <h2>Priority:</h2>
+                <h4>Priority:</h4>
                 <p id="todo-priority">Todo Priority</p>
             </div>
             <div>
-                <h2>Note:</h2>
+                <h4>Note:</h4>
                 <p id="todo-note">Todo Note</p>
             </div>
         </form>
@@ -146,9 +150,9 @@
             <div class="project">Project 2</div>
         </div>
         <div>
-            <button id="add-todo" class="sidebar-dialog-button">Add Todo</button>
-            <button id="add-project" class="sidebar-dialog-button">Add Project</button>
-            <button id="delete" class="sidebar-dialog-button">Delete Todo or Project</button>
+            <button data-modal="add-todo" class="dialog-button">Add Todo</button>
+            <button data-modal="add-project" class="dialog-button">Add Project</button>
+            <button data-modal="delete" class="dialog-button">Delete Todo or Project</button>
         </div>
     </div>
     <div id="content">

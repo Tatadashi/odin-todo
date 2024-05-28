@@ -4,51 +4,68 @@ import { addProject, addTodo, deleteProject, deleteTodo } from "./nonDOM";
 import { projectList, defaultProject } from "./default";
 import { loadTabHtml } from "./tabEvents";
 
-function setAllCloseModalOnClick () {
-    const closeModalButtons = document.querySelectorAll('.close');
-    closeModalButtons.forEach(button => {
-        button.addEventListener(`click`, (e) => {
-            dialogSidebar.close();
+const modals = document.querySelectorAll('.modal');
+const dialogButtons = document.querySelectorAll('.dialog-button');
+
+function hideModals() {
+    modals.forEach(modal => {
+        modal.classList.remove('visible');
+        modal.close();
+    });
+}
+
+function showModal(id) {
+    const modal = document.getElementById(id);
+    modal.classList.add('visible');
+    modal.showModal();
+}
+
+function setModalOpen() {
+    dialogButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const modalID = button.dataset.modal;
+            const formID = modalID + '-form';
+            const form = document.getElementById(formID);
+
+            form.reset();
+
+            hideModals();
+            showModal(modalID);
+            
+            showTodos();
+            updateTodoDropdown(defaultProject.title);
+            updateAllProjectDropdowns();
         });
     });
 }
 
-function setSidebarOpenModalOnClick (button) {
-    button.addEventListener('click', (e) => {
-        const formID = button.id + '-form';
-        const form = document.getElementById(formID);
-        form.reset();
-        dialog.showModal();
-        showTodos();
-        updateTodoDropdown(defaultProject.title);
-        updateAllProjectDropdowns();
+function setModalClose() {
+    modals.forEach (modal => {
+        const xButton = modal.querySelector('.close');
+        xButton.addEventListener('click', (e) => {
+            hideModals();
+        });
     });
 }
 
-function setTodoOpenModalOnClick (button) {
+function setTodoModalOpen (button) {
     button.addEventListener('click', (e) => {
-        eep.showModal();
+        const modalID = button.dataset.modal;
+
+        hideModals();
+        showModal(modalID);
     });
 }
 
-function setAllTodoOpenModalOnClick () {
+function setAllTodoModalOpen () {
     const dialogButtons = document.querySelectorAll('.todo-info-button');
     dialogButtons.forEach(button => {
-        setTodoOpenModalOnClick(button);
-    });
-}
-
-function setAllSidebarOpenModalOnClick () {
-    const dialogButtons = document.querySelectorAll('.sidebar-dialog-button');
-    dialogButtons.forEach(button => {
-        setSidebarOpenModalOnClick(button);
+        setTodoModalOpen(button);
     });
 }
 
 function setAddTodoModalSubmit (form) {
     form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
         const formData = new FormData(form);
         const project = formData.get('projects');
         const name = formData.get('name');
@@ -59,30 +76,22 @@ function setAddTodoModalSubmit (form) {
 
         addTodo(project, name, description, date, priority, notes);
         loadTabHtml('todos', project);
-
-        dialogSidebar.close();
     });
 }
 
 function setAddProjectModalSubmit (form) {
     form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
         const formData = new FormData(form);
         const name = formData.get('name');
 
         addProject(name);
         loadTabHtml('todos', name);
         updateSidebar(projectList);
-
-        dialogSidebar.close();
     });
 }
 
 function setDeleteModalSubmit (form) {
     form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
         const formData = new FormData(form);
         const type = formData.get('types');
         const project = formData.get('projects');
@@ -97,8 +106,6 @@ function setDeleteModalSubmit (form) {
             loadTabHtml('todos');
             updateSidebar(projectList);
         }
-
-        dialogSidebar.close();
     });
 }
 
@@ -114,9 +121,9 @@ function setAllModalSubmit () {
 }
 
 function setAllModalEvents () {
-    setAllCloseModalOnClick();
-    setAllSidebarOpenModalOnClick();
+    setModalOpen();
     setAllModalSubmit();
+    setModalClose()
 }
 
-export { setAllModalEvents, setAllTodoOpenModalOnClick };
+export { setAllModalEvents, setAllTodoModalOpen };

@@ -13,8 +13,15 @@ body {
     height: 100vh;
 }
 
-dialog {
+.modal {
     margin: auto;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.visible {
+    pointer-events: all;
+    opacity: 1;
 }
 
 form {

@@ -11,20 +11,35 @@ function findItemFromListByName (itemName, list) {
     return chosenItem;
 }
 
+function checkIfUniqueName (name, list) {
+    if (findItemFromListByName(name, list) == null) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function addTodo (projectName, todoName, description, dueDate, priority, note) {
     const newTodo = new Todo(todoName, description, dueDate, priority, note);
-
     const chosenProject = findItemFromListByName(projectName, projectList);
-
     let newTodoList = chosenProject.todoList;
-    newTodoList.push(newTodo);
 
-    chosenProject.changeProperty('todoList', newTodoList);    
+    if (checkIfUniqueName(todoName, newTodoList)) {
+        newTodoList.push(newTodo);
+        chosenProject.changeProperty('todoList', newTodoList); 
+    } else {
+        alert('Creation Failed: name already exists');
+    }
 }
 
 function addProject (projectName) {
     const newProject = new Project(projectName);
-    projectList.push(newProject);
+
+    if (checkIfUniqueName(projectName, projectList)) {
+        projectList.push(newProject);
+    } else {
+        alert('Creation Failed: name already exists');
+    }
 }
 
 function deleteProject (projectName) {

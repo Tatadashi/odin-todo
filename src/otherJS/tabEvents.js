@@ -1,13 +1,13 @@
 import { updateContent } from './DOM';
 import { defaultProject } from './default';
-import { setAllTodoOpenModalOnClick } from './modalEvents';
+import { setAllTodoModalOpen } from './modalEvents';
 
 function loadTabHtml (tabName, projectName=defaultProject.title) {
     $(document).ready(function() {
         $("#content").load(`./htmlCopies/${tabName}.html .main`, function() {
             if (tabName == 'todos') {
                 updateContent(projectName);
-                setAllTodoOpenModalOnClick();
+                setAllTodoModalOpen();
             }
         });
      });

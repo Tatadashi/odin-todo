@@ -2,28 +2,8 @@ import { projectList } from "./default";
 import { findItemFromListByName } from "./nonDOM";
 import { defaultProject } from "./default";
 
-//show form being clicked, hide other 2 forms
-function setFormButtons () {
-    $('#add-todo').click(function() {
-        $('#add-todo-form').show();
-        $('#add-project-form').hide();
-        $('#delete-form').hide();
-    });
-    $('#add-project').click(function() {
-        $('#add-project-form').show();
-        $('#add-todo-form').hide();
-        $('#delete-form').hide();
-    });
-    $('#delete').click(function() {
-        $('#add-project-form').hide();
-        $('#add-todo-form').hide();
-        $('#delete-form').show();
-    });
-}
-
 function setAllFormEvents () {
     setDeleteFormEvents();
-    setFormButtons();
 }
 
 function updateAllProjectDropdowns () {
