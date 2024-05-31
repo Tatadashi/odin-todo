@@ -46,6 +46,8 @@ function updateContent (projectName) {
         const todoItem = document.createElement('li');
         todoItem.textContent = todo.title;
         todoItem.dataset.modal = 'todo-info';
+        todoItem.dataset.project = project.title;
+        todoItem.dataset.name = todo.title;
         todoItem.classList.add('todo-info-button');
         projectTodos.appendChild(todoItem);
     });

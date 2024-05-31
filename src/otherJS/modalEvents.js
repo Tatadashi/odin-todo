@@ -1,4 +1,4 @@
-import { updateAllProjectDropdowns, updateTodoDropdown, showTodos } from "./form";
+import { updateAllProjectDropdowns, updateTodoDropdown, showTodos, updateTodoInfo } from "./form";
 import { updateSidebar } from "./DOM";
 import { addProject, addTodo, deleteProject, deleteTodo } from "./nonDOM";
 import { projectList, defaultProject } from "./default";
@@ -51,6 +51,10 @@ function setModalClose() {
 function setTodoModalOpen (button) {
     button.addEventListener('click', (e) => {
         const modalID = button.dataset.modal;
+        const todoName = button.dataset.name;
+        const projectName = button.dataset.project;
+
+        updateTodoInfo(todoName, projectName);
 
         hideModals();
         showModal(modalID);

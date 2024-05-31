@@ -1,7 +1,6 @@
 import { updateSidebar } from "./DOM";
 
 class Todo {
-    //will create toDo from form data
     constructor (title, description, dueDate, priority, notes) {
         this.title = title;
         this.description = description;

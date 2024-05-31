@@ -73,4 +73,21 @@ function fillDropdownWithList (dropdown, list) {
     });
 }
 
-export { updateAllProjectDropdowns, setAllFormEvents, updateTodoDropdown, showTodos };
+function updateTodoInfo (todoName, projectName) {
+    const project = findItemFromListByName(projectName, projectList);
+    const todo = findItemFromListByName(todoName, project.todoList);
+
+    const todoNameElement = document.getElementById('todo-name');
+    const todoDescriptionElement = document.getElementById('todo-description');
+    const todoDueDateElement = document.getElementById('todo-due-date');
+    const todoPriorityElement = document.getElementById('todo-priority');
+    const todoNoteElement = document.getElementById('todo-note');
+
+    todoNameElement.textContent = todo.title;
+    todoDescriptionElement.textContent = todo.description;
+    todoDueDateElement.textContent = todo.dueDate;
+    todoPriorityElement.textContent = todo.priority;
+    todoNoteElement.textContent = todo.notes;
+}
+
+export { updateAllProjectDropdowns, setAllFormEvents, updateTodoDropdown, showTodos, updateTodoInfo };

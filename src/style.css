@@ -33,8 +33,8 @@ form {
 
 form div {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
+    gap: 50px;
     width: 100%;
 }
 
