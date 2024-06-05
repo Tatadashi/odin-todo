@@ -28,7 +28,7 @@ function addTodo (projectName, todoName, description, dueDate, priority, note) {
         newTodoList.push(newTodo);
         chosenProject.changeProperty('todoList', newTodoList); 
     } else {
-        alert('Creation Failed: name already exists');
+        alert('Todo Creation Failed: name already exists');
     }
 }
 
@@ -40,6 +40,40 @@ function addProject (projectName) {
     } else {
         alert('Creation Failed: name already exists');
     }
+}
+
+function editTodo (projectName, todoName, description, dueDate, priority, note) {
+    const editTodoNameElement = document.getElementById('todo-name-edit-input');
+    const todoOriginalName = editTodoNameElement.dataset.originalName;
+    const todoOriginalProjectName = editTodoNameElement.dataset.originalProject;
+
+    const todoOriginalProject = findItemFromListByName(todoOriginalProjectName, projectList);
+    const todo = findItemFromListByName(todoOriginalName, todoOriginalProject.todoList);
+    const project = findItemFromListByName(projectName, projectList);
+
+    if (checkIfUniqueName(todoName, project.todoList)) {
+        //new name, same project
+        editTodoInfo(todo, todoName, description, dueDate, priority, note);
+
+        //new name, new project or same name, new project
+        if (todoOriginalProjectName !== project.title) {
+            addTodo(projectName, todoName, description, dueDate, priority, note);
+            deleteTodo(todoOriginalProjectName, todoOriginalName);
+        }
+    //same name, same project
+    } else if (todoOriginalName == todoName && todoOriginalProjectName == project.title) {
+        editTodoInfo(todo, todoName, description, dueDate, priority, note);
+    } else {
+        alert('Edit Fail: todo name exists already in selected project')
+    }
+}
+
+function editTodoInfo (todo, newTodoName, newDescription, newDueDate, newPriority, newNote) {
+    todo.changeProperty('title', newTodoName);
+    todo.changeProperty('description', newDescription);
+    todo.changeProperty('dueDate', newDueDate);
+    todo.changeProperty('priority', newPriority);
+    todo.changeProperty('notes', newNote);
 }
 
 function deleteProject (projectName) {
@@ -81,10 +115,10 @@ function reassignDefaultProject () {
     return indexOfCopiedProject;
 }
 
-//have new object copy everything to old project
-function copyProject (oldProject, newProject) {
-    oldProject.changeProperty('title', newProject.title);
-    oldProject.changeProperty('todoList', newProject.todoList);
+//have new project copy everything from old project
+function copyProject (newProject, oldProject) {
+    newProject.changeProperty('title', oldProject.title);
+    newProject.changeProperty('todoList', oldProject.todoList);
 }
 
 function getFirstNonDefaultProject () {
@@ -97,4 +131,4 @@ function getFirstNonDefaultProject () {
     return project;
 }
 
-export { findItemFromListByName, addTodo, addProject, deleteProject, deleteTodo };
+export { findItemFromListByName, addTodo, addProject, deleteProject, deleteTodo, editTodo };

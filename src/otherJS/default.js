@@ -26,9 +26,9 @@ class Project {
 }
 
 //default
-const item1 = new Todo('clean', 'cleaning', '12/02/2004', 'high', 'room');
-const item2 = new Todo('hw', 'solving', '11/03/2013', 'low', 'math');
-const item3 = new Todo('game', 'gaming', '01/13/2029', 'max', 'fun');
+const item1 = new Todo('clean', 'cleaning', '2004-10-01', 'high', 'room');
+const item2 = new Todo('hw', 'solving', '2013-12-21', 'low', 'math');
+const item3 = new Todo('game', 'gaming', '2029-03-03', 'max', 'fun');
 const todoList = [item1, item2];
 const todoList2 = [item1, item3];
 const defaultProject = new Project('school', todoList);

@@ -13,6 +13,11 @@ function updateAllProjectDropdowns () {
     });
 }
 
+function setProjectDropdownSelect (valueSelected) {
+    const dropdown = document.getElementById('project-list-edit');
+    dropdown.value = valueSelected;
+}
+
 //shows todo question based on dropdown
 function checkDeleteType (value) {
     let deleteType = {
@@ -34,8 +39,9 @@ function hideTodos () {
 }
 
 function setDeleteFormEvents () {
-    setProjectDropdownEvent();
     setDeleteTypeDropdownEvent();
+    setActionTypeDropdownEvent();
+    setProjectDropdownEvent()
 }
 
 function setProjectDropdownEvent () {
@@ -50,6 +56,14 @@ function setDeleteTypeDropdownEvent () {
     const dropdown = document.getElementById('delete-type');
     dropdown.addEventListener('change', (e) => {
         checkDeleteType(dropdown.value);
+    });
+}
+
+function setActionTypeDropdownEvent () {
+    const dropdown = document.getElementById('action-type');
+    const button = document.getElementById('delete-button');
+    dropdown.addEventListener('change', (e) => {
+        button.textContent = dropdown.value;
     });
 }
 
@@ -77,17 +91,44 @@ function updateTodoInfo (todoName, projectName) {
     const project = findItemFromListByName(projectName, projectList);
     const todo = findItemFromListByName(todoName, project.todoList);
 
-    const todoNameElement = document.getElementById('todo-name');
-    const todoDescriptionElement = document.getElementById('todo-description');
-    const todoDueDateElement = document.getElementById('todo-due-date');
-    const todoPriorityElement = document.getElementById('todo-priority');
-    const todoNoteElement = document.getElementById('todo-note');
+    const todoNameElements = document.querySelectorAll('.todo-name');
+    const todoDescriptionElements = document.querySelectorAll('.todo-description');
+    const todoDueDateElements = document.querySelectorAll('.todo-due-date');
+    const todoPriorityElement = document.querySelector('.todo-priority');
+    const todoNoteElements = document.querySelectorAll('.todo-note');
 
-    todoNameElement.textContent = todo.title;
-    todoDescriptionElement.textContent = todo.description;
-    todoDueDateElement.textContent = todo.dueDate;
+    //textContent is for todoInfo modal, value is for todoEdit modal
+    todoNameElements.forEach(element => {
+        element.textContent = todo.title;
+        element.value = todo.title;
+
+        element.dataset.originalProject = project.title;
+        element.dataset.originalName = todo.title;
+    });
+    
+    todoDescriptionElements.forEach(element => {
+        element.textContent = todo.description;
+        element.value = todo.description;
+    });
+    
+    todoDueDateElements.forEach(element => {
+        element.textContent = todo.dueDate;
+        element.value = todo.dueDate;
+    });
+    
+    //textContent deletes children of dropdown
     todoPriorityElement.textContent = todo.priority;
-    todoNoteElement.textContent = todo.notes;
+    setPriorityDropdownSelect(todo.priority);
+
+    todoNoteElements.forEach(element => {
+        element.textContent = todo.notes;
+        element.value = todo.notes;
+    });
 }
 
-export { updateAllProjectDropdowns, setAllFormEvents, updateTodoDropdown, showTodos, updateTodoInfo };
+function setPriorityDropdownSelect (valueSelected) {
+    const dropdown = document.getElementById('todo-priority-edit-input');
+    dropdown.value = valueSelected;
+}
+
+export { updateAllProjectDropdowns, setAllFormEvents, updateTodoDropdown, showTodos, updateTodoInfo, setProjectDropdownSelect };

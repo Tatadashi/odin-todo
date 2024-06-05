@@ -1,6 +1,6 @@
-import { updateAllProjectDropdowns, updateTodoDropdown, showTodos, updateTodoInfo } from "./form";
+import { updateAllProjectDropdowns, updateTodoDropdown, showTodos, updateTodoInfo, setProjectDropdownSelect } from "./form";
 import { updateSidebar } from "./DOM";
-import { addProject, addTodo, deleteProject, deleteTodo } from "./nonDOM";
+import { addProject, addTodo, deleteProject, deleteTodo, editTodo } from "./nonDOM";
 import { projectList, defaultProject } from "./default";
 import { loadTabHtml } from "./tabEvents";
 
@@ -83,6 +83,21 @@ function setAddTodoModalSubmit (form) {
     });
 }
 
+function setEditTodoModalSubmit (form) {
+    form.addEventListener('submit', (e) => {
+        const formData = new FormData(form);
+        const project = formData.get('projects');
+        const name = formData.get('name');
+        const description = formData.get('description');
+        const date = formData.get('due-date');
+        const priority = formData.get('priority-level');
+        const notes = formData.get('note');
+
+        editTodo(project, name, description, date, priority, notes);
+        loadTabHtml('todos', project);
+    });
+}
+
 function setAddProjectModalSubmit (form) {
     form.addEventListener('submit', (e) => {
         const formData = new FormData(form);
@@ -100,17 +115,37 @@ function setDeleteModalSubmit (form) {
         const type = formData.get('types');
         const project = formData.get('projects');
         const todo = formData.get('todos');
+        const action = formData.get('actions');
 
-        if (type == 'todo') {
-            deleteTodo(project, todo);
-            loadTabHtml('todos', project);
-            updateTodoDropdown(project);
-        } else if (type == 'project') {
-            deleteProject(project);
-            loadTabHtml('todos');
-            updateSidebar(projectList);
+        if (action == 'Delete') {
+            deleteBasedOnType(type, project, todo);
+        } else if (action == 'Modify') {
+            openEditModal(type, project, todo);
         }
     });
+}
+
+function deleteBasedOnType (type, project, todo) {
+    if (type == 'todo') {
+        deleteTodo(project, todo);
+        loadTabHtml('todos', project);
+        updateTodoDropdown(project);
+    } else if (type == 'project') {
+        deleteProject(project);
+        loadTabHtml('todos');
+        updateSidebar(projectList);
+    }
+}
+
+function openEditModal (type, projectName, todoName) {
+    if (type == 'todo') {
+        hideModals();
+        showModal('edit-todo');
+
+        updateAllProjectDropdowns();
+        setProjectDropdownSelect(projectName);
+        updateTodoInfo(todoName, projectName);
+    }
 }
 
 function setAllModalSubmit () {
@@ -122,6 +157,9 @@ function setAllModalSubmit () {
 
     const deleteForm = document.getElementById('delete-form');
     setDeleteModalSubmit(deleteForm);
+
+    const editTodoForm = document.getElementById('edit-todo-form');
+    setEditTodoModalSubmit(editTodoForm);
 }
 
 function setAllModalEvents () {

@@ -53,7 +53,7 @@
                 </label>
             </p>
             <p>
-                <button type="submit" id="form-submit">Add</button>
+                <button type="submit">Add</button>
             </p>
         </form>
     </dialog>
@@ -69,18 +69,26 @@
                 </label>
             </p>
             <p>
-                <button type="submit" id="form-submit">Add</button>
+                <button type="submit">Add</button>
             </p>
         </form>
     </dialog>
     <dialog class="modal" id="delete">
         <form method="dialog" id="delete-form">
             <div>
-                <h2>Delete Todo or Project</h2>
+                <h2>Delete/Modify Todo or Project</h2>
                 <button type="button" formmethod="dialog" aria-label="close" class="close">X</button>
             </div>
             <p>
-                <label for="delete-type">Deleting which type (todo or project)?
+                <label for="action-type">Deleting or Modifying?
+                    <select name="actions" id="action-type">
+                        <option value="Delete">Delete</option>
+                        <option value="Modify">Modify</option>
+                    </select>
+                </label>
+            </p>
+            <p>
+                <label for="delete-type">Affecting which type (todo or project)?
                     <select name="types" id="delete-type">
                         <option value="todo">Todo</option>
                         <option value="project">Project</option>
@@ -88,7 +96,7 @@
                 </label>
             </p>
             <p>
-                <label for="modify-project">Which project being modified?
+                <label for="modify-project">Which project being affected?
                     <select name="projects" class="project-list" id="modify-project">
                         <option value="one">Project 1</option>
                         <option value="two">Project 2</option>
@@ -96,7 +104,7 @@
                 </label>
             </p>
             <p id="modify-todo-question">
-                <label for="modify-todo">Which todo being deleted?
+                <label for="modify-todo">Which todo being affected?
                     <select name="todos" id="modify-todo">
                         <option value="one">Todo 1</option>
                         <option value="two">Todo 2</option>
@@ -104,36 +112,86 @@
                 </label>
             </p>
             <p>
-                <button type="submit" id="form-submit">Delete</button>
+                <button type="submit" id="delete-button">Delete</button>
             </p>
         </form>     
     </dialog>
     <dialog class="modal" id="todo-info">
-        <form method="dialog" id="todo-info">
+        <form method="dialog">
             <div>
                 <h2>Todo Info</h2>
                 <button type="button" formmethod="dialog" aria-label="close" class="close">X</button>
             </div>
             <div>
                 <h4>Name:</h4>
-                <p id="todo-name">Todo Name</p>
+                <p class="todo-name">Todo Name</p>
             </div>
             <div>
                 <h4>Description:</h4>
-                <p id="todo-description">Todo Description</p>
+                <p class="todo-description">Todo Description</p>
             </div>
             <div>
                 <h4>Due Date:</h4>
-                <p id="todo-due-date">Todo Due Date</p>
+                <p class="todo-due-date">Todo Due Date</p>
             </div>
             <div>
                 <h4>Priority:</h4>
-                <p id="todo-priority">Todo Priority</p>
+                <p class="todo-priority">Todo Priority</p>
             </div>
             <div>
                 <h4>Note:</h4>
-                <p id="todo-note">Todo Note</p>
+                <p class="todo-note">Todo Note</p>
             </div>
+        </form>
+    </dialog>
+    <dialog class="modal" id="edit-todo">
+        <form method="dialog" id="edit-todo-form">
+            <div>
+                <h2>Edit Todo</h2>
+                <button type="button" formmethod="dialog" aria-label="close" class="close">X</button>
+            </div>
+            <p>
+                <label for="project-list-edit">Which project does todo belong to?
+                    <select name="projects" class="project-list" id="project-list-edit">
+                        <option value="one">Project 1</option>
+                        <option value="two">Project 2</option>
+                    </select>
+                </label>
+            </p>
+            <p>
+                <label for="todo-name-edit-input">Name:
+                    <input type="text" name="name" id="todo-name-edit-input" class="todo-name" autocomplete="off" required>
+                </label>
+            </p>
+            <p>
+                <label for="todo-description-edit-input">Description:
+                    <input type="text" name="description" id="todo-description-edit-input" autocomplete="off" class="todo-description" required>
+                </label>
+            </p>
+            <p>
+                <label for="todo-due-date-edit-input">Due Date:
+                    <input type="date" name="due-date" id="todo-due-date-edit-input" class="todo-due-date" required>
+                </label>
+            </p>
+            <p>
+                <label for="todo-priority-edit-input">Priority Level:
+                    <select name="priority-level" id="todo-priority-edit-input">
+                        <option value="min">Minimum</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                        <option value="max">Maximum</option>
+                    </select>
+                </label>
+            </p>
+            <p>
+                <label for="todo-note-edit-input">Notes
+                    <input type="text" name="note" id="todo-note-edit-input" class="todo-note" autocomplete="off">
+                </label>
+            </p>
+            <p>
+                <button type="submit">Edit</button>
+            </p>
         </form>
     </dialog>
     <div id="header">
