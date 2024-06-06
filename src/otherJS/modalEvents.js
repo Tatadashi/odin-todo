@@ -1,6 +1,6 @@
-import { updateAllProjectDropdowns, updateTodoDropdown, showTodos, updateTodoInfo, setProjectDropdownSelect } from "./form";
+import { updateAllProjectDropdowns, updateTodoDropdown, showTodos, updateTodoInfo, setProjectDropdownSelect, showProjectNameInput } from "./form";
 import { updateSidebar } from "./DOM";
-import { addProject, addTodo, deleteProject, deleteTodo, editTodo } from "./nonDOM";
+import { addProject, addTodo, deleteProject, deleteTodo, editTodo, editProject } from "./nonDOM";
 import { projectList, defaultProject } from "./default";
 import { loadTabHtml } from "./tabEvents";
 
@@ -109,6 +109,17 @@ function setAddProjectModalSubmit (form) {
     });
 }
 
+function setEditProjectModalSubmit (form) {
+    form.addEventListener('submit', (e) => {
+        const formData = new FormData(form);
+        const name = formData.get('name');
+
+        editProject(name);
+        loadTabHtml('todos', name);
+        updateSidebar(projectList);
+    });
+}
+
 function setDeleteModalSubmit (form) {
     form.addEventListener('submit', (e) => {
         const formData = new FormData(form);
@@ -145,6 +156,11 @@ function openEditModal (type, projectName, todoName) {
         updateAllProjectDropdowns();
         setProjectDropdownSelect(projectName);
         updateTodoInfo(todoName, projectName);
+    } else if (type == 'project') {
+        hideModals();
+        showModal('edit-project');
+
+        showProjectNameInput(projectName);
     }
 }
 
@@ -160,6 +176,9 @@ function setAllModalSubmit () {
 
     const editTodoForm = document.getElementById('edit-todo-form');
     setEditTodoModalSubmit(editTodoForm);
+
+    const editProjectForm = document.getElementById('edit-project-form');
+    setEditProjectModalSubmit(editProjectForm);
 }
 
 function setAllModalEvents () {

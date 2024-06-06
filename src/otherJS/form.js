@@ -126,9 +126,16 @@ function updateTodoInfo (todoName, projectName) {
     });
 }
 
+function showProjectNameInput (projectName) {
+    const projectInputElement = document.getElementById('project-name-edit-input');
+
+    projectInputElement.value = projectName;
+    projectInputElement.dataset.originalName = projectName;
+}
+
 function setPriorityDropdownSelect (valueSelected) {
     const dropdown = document.getElementById('todo-priority-edit-input');
     dropdown.value = valueSelected;
 }
 
-export { updateAllProjectDropdowns, setAllFormEvents, updateTodoDropdown, showTodos, updateTodoInfo, setProjectDropdownSelect };
+export { updateAllProjectDropdowns, setAllFormEvents, updateTodoDropdown, showTodos, updateTodoInfo, setProjectDropdownSelect, showProjectNameInput };

@@ -42,6 +42,18 @@ function addProject (projectName) {
     }
 }
 
+function editProject (projectName) {
+    const projectInputElement = document.getElementById('project-name-edit-input');
+    const projectOriginalName = projectInputElement.dataset.originalName;
+    const project = findItemFromListByName(projectOriginalName, projectList);
+
+    if (checkIfUniqueName(projectName, projectList)) {
+        project.title = projectName;
+    } else {
+        alert('Edit Failed: name already exists');
+    }
+}
+
 function editTodo (projectName, todoName, description, dueDate, priority, note) {
     const editTodoNameElement = document.getElementById('todo-name-edit-input');
     const todoOriginalName = editTodoNameElement.dataset.originalName;
@@ -131,4 +143,4 @@ function getFirstNonDefaultProject () {
     return project;
 }
 
-export { findItemFromListByName, addTodo, addProject, deleteProject, deleteTodo, editTodo };
+export { findItemFromListByName, addTodo, addProject, deleteProject, deleteTodo, editTodo, editProject };
