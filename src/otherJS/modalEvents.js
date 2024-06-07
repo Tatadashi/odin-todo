@@ -1,4 +1,4 @@
-import { updateAllProjectDropdowns, updateTodoDropdown, showTodos, updateTodoInfo, setProjectDropdownSelect, showProjectNameInput } from "./form";
+import { updateAllProjectDropdowns, updateTodoDropdown, showTodos, updateTodoInfo, setProjectDropdownSelect, showProjectNameInput, setPriorityInputDropdown } from "./form";
 import { updateSidebar } from "./DOM";
 import { addProject, addTodo, deleteProject, deleteTodo, editTodo, editProject } from "./nonDOM";
 import { projectList, defaultProject } from "./default";
@@ -32,6 +32,7 @@ function setModalOpen() {
             hideModals();
             showModal(modalID);
             
+            setPriorityInputDropdown();
             showTodos();
             updateTodoDropdown(defaultProject.title);
             updateAllProjectDropdowns();

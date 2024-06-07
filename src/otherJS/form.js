@@ -118,7 +118,7 @@ function updateTodoInfo (todoName, projectName) {
     
     //textContent deletes children of dropdown
     todoPriorityElement.textContent = todo.priority;
-    setPriorityDropdownSelect(todo.priority);
+    setPriorityInputDropdown(todo.priority);
 
     todoNoteElements.forEach(element => {
         element.textContent = todo.notes;
@@ -133,9 +133,22 @@ function showProjectNameInput (projectName) {
     projectInputElement.dataset.originalName = projectName;
 }
 
-function setPriorityDropdownSelect (valueSelected) {
-    const dropdown = document.getElementById('todo-priority-edit-input');
-    dropdown.value = valueSelected;
+function setPriorityInputDropdown (valueSelected = 'min') {
+    const dropdowns = document.querySelectorAll('.priority-input');
+    dropdowns.forEach(dropdown => {
+        dropdown.value = valueSelected;
+        setPriorityInputColor(dropdown);
+    });
 }
 
-export { updateAllProjectDropdowns, setAllFormEvents, updateTodoDropdown, showTodos, updateTodoInfo, setProjectDropdownSelect, showProjectNameInput };
+function setPriorityInputColor (dropdown) {
+    dropdown.addEventListener('change', (e) => {
+        const priorityString = dropdown.value.toLowerCase() + '-priority';
+        dropdown.className = priorityString;
+        dropdown.classList.add('priority-input');
+    });
+
+    dropdown.dispatchEvent(new Event('change'));
+}
+
+export { updateAllProjectDropdowns, setAllFormEvents, updateTodoDropdown, showTodos, updateTodoInfo, setProjectDropdownSelect, showProjectNameInput, setPriorityInputDropdown };

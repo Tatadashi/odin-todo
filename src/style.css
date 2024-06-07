@@ -38,6 +38,30 @@ form div {
     width: 100%;
 }
 
+.priority-input {
+    background-color: lightslategrey;
+}
+
+.min-priority {
+    color: lightblue;
+}
+
+.low-priority {
+    color: lightgreen;
+}
+
+.medium-priority {
+    color: gold;
+}
+
+.high-priority {
+    color: orange;
+}
+
+.max-priority {
+    color: lightsalmon;
+}
+
 #header {
     background-color: cadetblue;
     grid-area: header;
@@ -68,7 +92,6 @@ form div {
 }
 
 #content {
-    background-color: bisque;
     grid-area: content;
 }
 
@@ -93,7 +116,7 @@ form div {
 }
 
 #todos {
-    background-color: lavenderblush;
+    background-color: lightslategrey;
     box-sizing: border-box;
     padding: 10px;
 }

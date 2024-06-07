@@ -49,6 +49,7 @@ function updateContent (projectName) {
         todoItem.dataset.project = project.title;
         todoItem.dataset.name = todo.title;
         todoItem.classList.add('todo-info-button');
+        todoItem.classList.add(todo.priority + '-priority');
         projectTodos.appendChild(todoItem);
     });
 
