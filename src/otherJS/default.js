@@ -1,12 +1,14 @@
+import { addTodo, addProject } from "./nonDOM";
 import { updateSidebar } from "./DOM";
 
 class Todo {
-    constructor (title, description, dueDate, priority, notes) {
+    constructor (title, description, dueDate, priority, notes, finished = false) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
         this.notes = notes;
+        this.finished = finished;
     }
 
     changeProperty (property, newInfo) {
@@ -15,9 +17,10 @@ class Todo {
 }
 
 class Project {
-    constructor (title, todoList = []) {
+    constructor (title, todoList = [], finished = false) {
         this.title = title;
         this.todoList = todoList;
+        this.finished = finished;
     }
 
     changeProperty (property, newInfo) {
@@ -26,21 +29,21 @@ class Project {
 }
 
 //default
-const item1 = new Todo('clean', 'cleaning', '2004-10-01', 'high', 'room');
-const item2 = new Todo('hw', 'solving', '2013-12-21', 'low', 'math');
-const item3 = new Todo('game', 'gaming', '2029-03-03', 'max', 'fun');
-const todoList = [item1, item2];
-const todoList2 = [item1, item3];
-const defaultProject = new Project('school', todoList);
-const project2 = new Project('home', todoList2);
-const project3 = new Project('stuff', todoList2);
+const defaultProject = new Project('school');
+const projectList = [defaultProject];
 
-//test change todoList
-const todoList3 = [item3, item2];
-project2.changeProperty('todoList', todoList3);
+addTodo('school','clean', 'cleaning', '2004-10-01', 'high', 'room');
+addTodo('school','hw', 'solving', '2013-12-21', 'low', 'math');
 
-const projectList = [defaultProject, project2, project3];
+addProject('home');
+addTodo('home','game', 'gaming', '2029-03-03', 'max', 'fun');
+addTodo('home','clean', 'cleaning', '2004-10-01', 'high', 'room');
 
+addProject('stuff');
+addTodo('stuff','hw', 'solving', '2013-12-21', 'low', 'math');
+addTodo('stuff','game', 'gaming', '2029-03-03', 'max', 'fun');
+
+//updateSidebar here causes bug, likely not circular dependency, 
 updateSidebar(projectList);
 
 export {projectList, defaultProject, Todo, Project};

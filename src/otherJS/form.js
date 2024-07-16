@@ -151,4 +151,79 @@ function setPriorityInputColor (dropdown) {
     dropdown.dispatchEvent(new Event('change'));
 }
 
-export { updateAllProjectDropdowns, setAllFormEvents, updateTodoDropdown, showTodos, updateTodoInfo, setProjectDropdownSelect, showProjectNameInput, setPriorityInputDropdown };
+//not
+function setProjectCheckMark () {
+    const projectCheckbox = document.getElementById('project-check-box');
+    const projectName = projectCheckbox.name;
+    const project = findItemFromListByName(projectName, projectList);
+
+    if (project.finished) {
+        projectCheckbox.checked = project.finished;
+        toggleAllTodosCheckMarks(project);
+    }
+
+    setProjectOnCheck(projectCheckbox, project);
+}
+
+//nothere
+function setProjectOnCheck (checkbox, project) {
+    checkbox.addEventListener('change', (e) => {
+        toggleProjectCheckMarks(checkbox, project);
+        toggleAllTodosCheckMarks(project);
+    });
+}
+
+//now
+function toggleProjectCheckMarks (checkbox, project, type = !project.finished) {
+    project.finished = type;
+    checkbox.checked = type;
+}
+
+//nothere
+function toggleAllTodosCheckMarks (project) {
+    const todoCheckboxes = document.querySelectorAll('.checkbox-container input');
+    todoCheckboxes.forEach(todoCheckbox => {
+        todoCheckbox.checked = project.finished;
+    });
+
+    project.todoList.forEach(todo => {
+        todo.finished = project.finished;
+    });
+}
+
+//nothere
+function setTodoCheckMark (todo, container) {
+    const todoCheckbox = container.querySelector('input');
+    todoCheckbox.checked = todo.finished;
+
+    setTodoOnCheck(todoCheckbox, todo);}
+
+//nothere
+function setTodoOnCheck (checkbox, todo) {
+    const projectCheckbox = document.getElementById('project-check-box');
+    const projectName = projectCheckbox.name;
+    const project = findItemFromListByName(projectName, projectList);
+
+    checkbox.addEventListener('change', (e) => {
+        todo.finished = checkbox.checked;
+
+        if (!todo.finished) {
+            toggleProjectCheckMarks(projectCheckbox, project, false);
+        } else if (checkIfAllTodosChecked(project)) {
+            toggleProjectCheckMarks(projectCheckbox, project, true);
+        }
+    });
+}
+
+function checkIfAllTodosChecked (project) {
+    let allTodoFinished = true;
+    project.todoList.forEach(todo => {
+        if (!todo.finished) {
+            allTodoFinished = false;
+        }
+    });
+
+    return allTodoFinished;
+}
+
+export { updateAllProjectDropdowns, setAllFormEvents, updateTodoDropdown, showTodos, updateTodoInfo, setProjectDropdownSelect, showProjectNameInput, setPriorityInputDropdown, setProjectCheckMark, setTodoCheckMark };
