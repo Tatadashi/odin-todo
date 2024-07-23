@@ -1,5 +1,4 @@
 import { addTodo, addProject } from "./nonDOM";
-import { updateSidebar } from "./DOM";
 
 class Todo {
     constructor (title, description, dueDate, priority, notes, finished = false) {
@@ -42,9 +41,6 @@ addTodo('home','clean', 'cleaning', '2004-10-01', 'high', 'room');
 addProject('stuff');
 addTodo('stuff','hw', 'solving', '2013-12-21', 'low', 'math');
 addTodo('stuff','game', 'gaming', '2029-03-03', 'max', 'fun');
-
-//updateSidebar here causes bug, likely not circular dependency, 
-updateSidebar(projectList);
 
 export {projectList, defaultProject, Todo, Project};
 

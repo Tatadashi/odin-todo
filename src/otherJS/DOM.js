@@ -10,6 +10,7 @@ function setDOMEvents () {
     setAllTabOnClickEvents();
     setAllModalEvents();
     setAllFormEvents();
+    updateSidebar(projectList);
 }
 
 //Update sidebar DOM to include all projects in given list with on click event to show content
