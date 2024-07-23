@@ -1,5 +1,3 @@
-import { addTodo, addProject } from "./nonDOM";
-
 class Todo {
     constructor (title, description, dueDate, priority, notes, finished = false) {
         this.title = title;
@@ -31,18 +29,25 @@ class Project {
 const defaultProject = new Project('school');
 const projectList = [defaultProject];
 
-addTodo('school','clean', 'cleaning', '2004-10-01', 'high', 'room');
-addTodo('school','hw', 'solving', '2013-12-21', 'low', 'math');
+const defaultTodo1 = new Todo('clean', 'cleaning', '2004-10-01', 'high', 'room');
+const defaultTodo2 = new Todo('hw', 'solving', '2013-12-21', 'low', 'math');
+const defaultTodoList = [defaultTodo1, defaultTodo2];
+defaultProject.changeProperty('todoList', defaultTodoList);
 
-addProject('home');
-addTodo('home','game', 'gaming', '2029-03-03', 'max', 'fun');
-addTodo('home','clean', 'cleaning', '2004-10-01', 'high', 'room');
 
-addProject('stuff');
-addTodo('stuff','hw', 'solving', '2013-12-21', 'low', 'math');
-addTodo('stuff','game', 'gaming', '2029-03-03', 'max', 'fun');
+const project1 = new Project('home');
+const project1Todo1 = new Todo('game', 'gaming', '2029-03-03', 'max', 'fun');
+const project1Todo2 = new Todo('clean', 'cleaning', '2004-10-01', 'high', 'room');
+const project1TodoList = [project1Todo1, project1Todo2];
+project1.changeProperty('todoList', project1TodoList);
+
+const project2 = new Project('stuff');
+const project2Todo1 = new Todo('hw', 'solving', '2013-12-21', 'low', 'math');
+const project2Todo2 = new Todo('game', 'gaming', '2029-03-03', 'max', 'fun');
+const project2TodoList = [project2Todo1, project2Todo2];
+project2.changeProperty('todoList', project2TodoList);
+
+projectList.push(project1);
+projectList.push(project2);
 
 export {projectList, defaultProject, Todo, Project};
-
-// project.changeProperty('title', 'college');
-// item1.changeProperty('description', 'jon');
