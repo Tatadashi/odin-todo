@@ -1,7 +1,6 @@
 import { updateAllProjectDropdowns, updateTodoDropdown, showTodos, updateTodoInfo, setProjectDropdownSelect, showProjectNameInput, setPriorityInputDropdown } from "./form";
-import { updateSidebar } from "./DOM";
 import { addProject, addTodo, deleteProject, deleteTodo, editTodo, editProject } from "./nonDOM";
-import { projectList, defaultProject } from "./default";
+import { defaultProject } from "./default";
 import { loadTabHtml } from "./tabEvents";
 
 const modals = document.querySelectorAll('.modal');
@@ -106,7 +105,6 @@ function setAddProjectModalSubmit (form) {
 
         addProject(name);
         loadTabHtml('todos', name);
-        updateSidebar(projectList);
     });
 }
 
@@ -117,7 +115,6 @@ function setEditProjectModalSubmit (form) {
 
         editProject(name);
         loadTabHtml('todos', name);
-        updateSidebar(projectList);
     });
 }
 
@@ -145,7 +142,6 @@ function deleteBasedOnType (type, project, todo) {
     } else if (type == 'project') {
         deleteProject(project);
         loadTabHtml('todos');
-        updateSidebar(projectList);
     }
 }
 

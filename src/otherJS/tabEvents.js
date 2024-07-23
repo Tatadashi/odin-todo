@@ -1,5 +1,5 @@
-import { updateContent } from './DOM';
-import { defaultProject } from './default';
+import { updateContent, updateSidebar } from './DOM';
+import { defaultProject, projectList } from './default';
 import { setAllTodoModalOpen } from './modalEvents';
 import { setProjectCheckMark } from './form';
 
@@ -11,6 +11,8 @@ function loadTabHtml (tabName, projectName=defaultProject.title) {
                 setAllTodoModalOpen();
                 setProjectCheckMark();
             }
+
+            updateSidebar(projectList);
         });
      });
 }
