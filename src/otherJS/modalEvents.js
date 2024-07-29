@@ -80,6 +80,7 @@ function setAddTodoModalSubmit (form) {
 
         addTodo(project, name, description, date, priority, notes);
         loadTabHtml('todos', project);
+        setAllTodoModalOpen();
     });
 }
 
@@ -95,6 +96,7 @@ function setEditTodoModalSubmit (form) {
 
         editTodo(project, name, description, date, priority, notes);
         loadTabHtml('todos', project);
+        setAllTodoModalOpen();
     });
 }
 
@@ -105,6 +107,7 @@ function setAddProjectModalSubmit (form) {
 
         addProject(name);
         loadTabHtml('todos', name);
+        setAllTodoModalOpen();
     });
 }
 
@@ -115,6 +118,7 @@ function setEditProjectModalSubmit (form) {
 
         editProject(name);
         loadTabHtml('todos', name);
+        setAllTodoModalOpen();
     });
 }
 
@@ -138,10 +142,12 @@ function deleteBasedOnType (type, project, todo) {
     if (type == 'todo') {
         deleteTodo(project, todo);
         loadTabHtml('todos', project);
+        setAllTodoModalOpen();
         updateTodoDropdown(project);
     } else if (type == 'project') {
         deleteProject(project);
         loadTabHtml('todos');
+        setAllTodoModalOpen();
     }
 }
 
