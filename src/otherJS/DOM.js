@@ -1,14 +1,10 @@
 import Icon from './checkmark.png';
-import { setAllTabOnClickEvents, loadTabHtml } from './tabEvents';
-import { setAllModalEvents } from './modalEvents';
 import { projectList } from './default';
 import { findItemFromListByName } from './nonDOM';
 import { setAllFormEvents, setTodoCheckMark } from './form';
 
 //modal and tab events
 function setDOMEvents () {
-    setAllTabOnClickEvents();
-    setAllModalEvents();
     setAllFormEvents();
     updateSidebar(projectList);
 }
@@ -32,9 +28,7 @@ function updateSidebar (projectList) {
         
         projectDiv.appendChild(myIcon);
 
-        projectDiv.addEventListener('click', (e) => {
-            loadTabHtml('todos', project.title)
-        });
+        projectDiv.classList.add('sidebar-project-div');
        
         sidebarProjects.appendChild(projectDiv);
     });

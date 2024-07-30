@@ -11,6 +11,7 @@ function loadTabHtml (tabName, projectName=defaultProject.title) {
             }
 
             updateSidebar(projectList);
+            setSidebarTabOnClickEvents();
         });
      });
 }
@@ -21,6 +22,18 @@ function setAllTabOnClickEvents () {
         const tabNameOnWebsite = tab.textContent.toLowerCase();
         tab.addEventListener('click', (e) => {
             loadTabHtml(tabNameOnWebsite);
+        });
+    });
+}
+
+function setSidebarTabOnClickEvents () {
+    const sidebarProjectDivs = document.querySelectorAll('.sidebar-project-div');
+
+    sidebarProjectDivs.forEach(projectDiv => {
+        const projectName = projectDiv.children[0].textContent;
+
+        projectDiv.addEventListener('click', (e) => {
+            loadTabHtml('todos', projectName)
         });
     });
 }
