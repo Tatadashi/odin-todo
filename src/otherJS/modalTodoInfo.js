@@ -20,7 +20,6 @@ function showModal(id) {
 
 function setTodoModalOpen (button) {
     button.addEventListener('click', (e) => {
-        console.log('loaded4');
         const modalID = button.dataset.modal;
         const todoName = button.dataset.name;
         const projectName = button.dataset.project;
