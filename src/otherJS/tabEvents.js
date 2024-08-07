@@ -1,6 +1,7 @@
 import { updateContent, updateSidebar } from './DOM';
 import { defaultProject, projectList } from './default';
 import { setProjectCheckMark } from './form';
+import { setAllTodoModalOpen } from './modalTodoInfo';
 
 function loadTabHtml (tabName, projectName=defaultProject.title) {
     $(document).ready(function() {
@@ -8,6 +9,7 @@ function loadTabHtml (tabName, projectName=defaultProject.title) {
             if (tabName == 'todos') {
                 updateContent(projectName);
                 setProjectCheckMark();
+                setAllTodoModalOpen();
             }
 
             updateSidebar(projectList);

@@ -2,6 +2,7 @@ import { updateAllProjectDropdowns, updateTodoDropdown, showTodos, updateTodoInf
 import { addProject, addTodo, deleteProject, deleteTodo, editTodo, editProject } from "./nonDOM";
 import { defaultProject } from "./default";
 import { loadTabHtml } from "./tabEvents";
+import { setAllTodoModalOpen } from "./modalTodoInfo";
 
 const modals = document.querySelectorAll('.modal');
 const dialogButtons = document.querySelectorAll('.dialog-button');
@@ -45,26 +46,6 @@ function setModalClose() {
         xButton.addEventListener('click', (e) => {
             hideModals();
         });
-    });
-}
-
-function setTodoModalOpen (button) {
-    button.addEventListener('click', (e) => {
-        const modalID = button.dataset.modal;
-        const todoName = button.dataset.name;
-        const projectName = button.dataset.project;
-
-        updateTodoInfo(todoName, projectName);
-
-        hideModals();
-        showModal(modalID);
-    });
-}
-
-function setAllTodoModalOpen () {
-    const dialogButtons = document.querySelectorAll('.todo-info-button');
-    dialogButtons.forEach(button => {
-        setTodoModalOpen(button);
     });
 }
 
@@ -142,13 +123,13 @@ function deleteBasedOnType (type, project, todo) {
     if (type == 'todo') {
         deleteTodo(project, todo);
         loadTabHtml('todos', project);
-        setAllTodoModalOpen();
         updateTodoDropdown(project);
-    } else if (type == 'project') {
+    } else {
         deleteProject(project);
         loadTabHtml('todos');
-        setAllTodoModalOpen();
     }
+
+    setAllTodoModalOpen();
 }
 
 function openEditModal (type, projectName, todoName) {
@@ -190,4 +171,4 @@ function setAllModalEvents () {
     setModalClose()
 }
 
-export { setAllModalEvents, setAllTodoModalOpen };
+export { setAllModalEvents };
