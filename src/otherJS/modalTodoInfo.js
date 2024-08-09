@@ -11,7 +11,6 @@ function hideModals() {
 }
 
 //same as modalEvents (no import because circular dependency)
-
 function showModal(id) {
     const modal = document.getElementById(id);
     modal.classList.add('visible');
