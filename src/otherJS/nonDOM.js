@@ -143,4 +143,61 @@ function getFirstNonDefaultProject () {
     return project;
 }
 
+/** for testing
+ * 
+class Todo {
+    constructor (title, description, dueDate, priority, notes, finished = false) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.notes = notes;
+        this.finished = finished;
+    }
+
+    changeProperty (property, newInfo) {
+        this[property] = newInfo;
+    }
+}
+
+const project1Todo1 = new Todo('game', 'gaming', '2029-03-03', 'max', 'fun');
+const project1Todo2 = new Todo('clean', 'cleaning', '2004-10-01', 'high', 'room');
+const project1Todo3 = new Todo('bear', 'cleaning', '2004-10-01', 'high', 'room');
+const project1Todo4 = new Todo('za', 'cleaning', '2004-10-01', 'high', 'room');
+
+let project1TodoList = [project1Todo1, project1Todo2, project1Todo3, project1Todo4];
+ */
+
+function sortTodos (project, sortCategory, sortOrder) {
+    const todoList = project.todoList;
+}
+
+function sortByPriority(todoList, sortOrder) {
+    
+}
+
+function sortByName (todoList, sortOrder) {
+    let todoListNamesOnly = [];
+    for (let i = 0; i < todoList.length; i++) {
+        const todoName = todoList[i].title;
+        todoListNamesOnly.push(todoName);
+    }
+
+    todoListNamesOnly = todoListNamesOnly.sort();
+    if (sortOrder == 'descending') {
+        todoListNamesOnly = todoListNamesOnly.sort().toReversed();
+    }
+
+    let newTodoList = [];
+    for (let i = 0; i < todoList.length; i++) {
+        for (let j = 0; j < todoList.length; j++) {
+            if (todoListNamesOnly[i] == todoList[j].title) {
+                newTodoList.push(todoList[j]);
+            }
+        }
+    }
+
+    return newTodoList;
+}
+
 export { findItemFromListByName, addTodo, addProject, deleteProject, deleteTodo, editTodo, editProject };
