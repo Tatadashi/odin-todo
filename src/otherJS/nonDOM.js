@@ -169,11 +169,63 @@ let project1TodoList = [project1Todo1, project1Todo2, project1Todo3, project1Tod
  */
 
 function sortTodos (project, sortCategory, sortOrder) {
-    const todoList = project.todoList;
+    if (sortCategory == 'priority') {
+        project.todoList = sortByPriority(project.todoList, sortOrder);
+    } else if (sortCategory == 'name') {
+        project.todoList = sortByName(project.todoList, sortOrder);
+    }
+}
+
+function changePriorityPropertyToInteger (object) {
+    switch (object.priority) {
+        case 'min':
+            object.priority = 1;
+            break;
+        case 'low':
+            object.priority = 2;
+            break;
+        case 'medium':
+            object.priority = 3;
+            break;
+        case 'high':
+            object.priority = 4;
+            break;
+        case 'max':
+            object.priority = 5;
+            break;
+        default:
+            console.log('priority not converted');
+            break;
+    }
 }
 
 function sortByPriority(todoList, sortOrder) {
-    
+    todoList.forEach(todo => {
+        changePriorityPropertyToInteger(todo);
+    });
+
+    let todoListPrioritysOnly = [];
+    for (let i = 0; i < todoList.length; i++) {
+        const todoPriority = todoList[i].priority;
+        todoListPrioritysOnly.push(todoPriority);
+    }
+
+    todoListPrioritysOnly = todoListPrioritysOnly.sort();
+    if (sortOrder == 'descending') {
+        todoListPrioritysOnly = todoListPrioritysOnly.sort().toReversed();
+    }
+
+    let newTodoList = [];
+    for (let i = 0; i < todoList.length; i++) {
+        for (let j = 0; j < todoList.length; j++) {
+            if (todoListPrioritysOnly[i] == todoList[j].priority) {
+                newTodoList.push(todoList[j]);
+                todoList[j] = 0;
+            }
+        }
+    }
+
+    return newTodoList;
 }
 
 function sortByName (todoList, sortOrder) {
