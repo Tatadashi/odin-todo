@@ -1,6 +1,6 @@
 import Icon from './checkmark.png';
 import { projectList } from './default';
-import { findItemFromListByName } from './nonDOM';
+import { findItemFromListByName, sortTodos } from './nonDOM';
 import { setAllFormEvents, setTodoCheckMark } from './form';
 
 //modal and tab events
@@ -41,6 +41,11 @@ function updateContent (projectName) {
     const projectTitle = document.getElementById('project-title');
     projectTitle.textContent = project.title;
 
+    addSortButtonFunctionalty(project);
+    generateTodos(project);
+}
+
+function generateTodos (project) {
     const projectCheckBox = document.getElementById('project-check-box');
     projectCheckBox.name = project.title;
 
@@ -71,6 +76,27 @@ function updateContent (projectName) {
     });
 
     projectTodosDiv.appendChild(projectTodos);
+}
+
+function addSortButtonFunctionalty (project) {
+    const sortButton = document.getElementById('sort-button');
+    const sortCategoryDropdown = document.getElementById('sort-category');
+    const sortOrderDropdown = document.getElementById('sort-order');
+
+    let sortCategory = sortCategoryDropdown.value;
+    sortCategoryDropdown.addEventListener('change', (e) => {
+        sortCategory = sortCategoryDropdown.value;
+    });
+
+    let sortOrder = sortOrderDropdown.value;
+    sortOrderDropdown.addEventListener('change', (e) => {
+        sortOrder = sortOrderDropdown.value;
+    });
+
+    sortButton.addEventListener('click', (e) => {
+        sortTodos(project, sortCategory, sortOrder);
+        generateTodos(project);
+    });
 }
 
 function createCheckbox () {

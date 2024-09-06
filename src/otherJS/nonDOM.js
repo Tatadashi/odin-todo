@@ -143,31 +143,6 @@ function getFirstNonDefaultProject () {
     return project;
 }
 
-/** for testing
- * 
-class Todo {
-    constructor (title, description, dueDate, priority, notes, finished = false) {
-        this.title = title;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.priority = priority;
-        this.notes = notes;
-        this.finished = finished;
-    }
-
-    changeProperty (property, newInfo) {
-        this[property] = newInfo;
-    }
-}
-
-const project1Todo1 = new Todo('game', 'gaming', '2029-03-03', 'max', 'fun');
-const project1Todo2 = new Todo('clean', 'cleaning', '2004-10-01', 'high', 'room');
-const project1Todo3 = new Todo('bear', 'cleaning', '2004-10-01', 'high', 'room');
-const project1Todo4 = new Todo('za', 'cleaning', '2004-10-01', 'high', 'room');
-
-let project1TodoList = [project1Todo1, project1Todo2, project1Todo3, project1Todo4];
- */
-
 function sortTodos (project, sortCategory, sortOrder) {
     if (sortCategory == 'priority') {
         project.todoList = sortByPriority(project.todoList, sortOrder);
@@ -194,7 +169,30 @@ function changePriorityPropertyToInteger (object) {
             object.priority = 5;
             break;
         default:
-            console.log('priority not converted');
+            console.log('priority not converted to integer');
+            break;
+    }
+}
+
+function changePriorityPropertyToString (object) {
+    switch (object.priority) {
+        case 1:
+            object.priority = 'min';
+            break;
+        case 2:
+            object.priority = 'low';
+            break;
+        case 3:
+            object.priority = 'medium';
+            break;
+        case 4:
+            object.priority = 'high';
+            break;
+        case 5:
+            object.priority = 'max';
+            break;
+        default:
+            console.log('priority not converted to string');
             break;
     }
 }
@@ -225,6 +223,10 @@ function sortByPriority(todoList, sortOrder) {
         }
     }
 
+    newTodoList.forEach(todo => {
+        changePriorityPropertyToString(todo);
+    });
+
     return newTodoList;
 }
 
@@ -252,4 +254,4 @@ function sortByName (todoList, sortOrder) {
     return newTodoList;
 }
 
-export { findItemFromListByName, addTodo, addProject, deleteProject, deleteTodo, editTodo, editProject };
+export { findItemFromListByName, addTodo, addProject, deleteProject, deleteTodo, editTodo, editProject, sortTodos };

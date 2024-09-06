@@ -10,6 +10,7 @@ function loadTabHtml (tabName, projectName=defaultProject.title) {
                 updateContent(projectName);
                 setProjectCheckMark();
                 setAllTodoModalOpen();
+                setSortButtonEvents();
             }
 
             updateSidebar(projectList);
@@ -37,6 +38,15 @@ function setSidebarTabOnClickEvents () {
         projectDiv.addEventListener('click', (e) => {
             loadTabHtml('todos', projectName)
         });
+    });
+}
+
+//when sort button clicked, all todos onclick works (Actual sorting part is in different fn in DOM.js)
+function setSortButtonEvents () {
+    const sortButton = document.getElementById('sort-button');
+
+    sortButton.addEventListener('click', (e) => {
+        setAllTodoModalOpen();
     });
 }
 

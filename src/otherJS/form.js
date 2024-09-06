@@ -151,7 +151,6 @@ function setPriorityInputColor (dropdown) {
     dropdown.dispatchEvent(new Event('change'));
 }
 
-//not
 function setProjectCheckMark () {
     const projectCheckbox = document.getElementById('project-check-box');
     const projectName = projectCheckbox.name;
@@ -165,7 +164,6 @@ function setProjectCheckMark () {
     setProjectOnCheck(projectCheckbox, project);
 }
 
-//nothere
 function setProjectOnCheck (checkbox, project) {
     checkbox.addEventListener('change', (e) => {
         toggleProjectCheckMarks(checkbox, project);
@@ -173,13 +171,11 @@ function setProjectOnCheck (checkbox, project) {
     });
 }
 
-//now
 function toggleProjectCheckMarks (checkbox, project, type = !project.finished) {
     project.finished = type;
     checkbox.checked = type;
 }
 
-//nothere
 function toggleAllTodosCheckMarks (project) {
     const todoCheckboxes = document.querySelectorAll('.checkbox-container input');
     todoCheckboxes.forEach(todoCheckbox => {
@@ -191,14 +187,12 @@ function toggleAllTodosCheckMarks (project) {
     });
 }
 
-//nothere
 function setTodoCheckMark (todo, container) {
     const todoCheckbox = container.querySelector('input');
     todoCheckbox.checked = todo.finished;
 
     setTodoOnCheck(todoCheckbox, todo);}
 
-//nothere
 function setTodoOnCheck (checkbox, todo) {
     const projectCheckbox = document.getElementById('project-check-box');
     const projectName = projectCheckbox.name;
