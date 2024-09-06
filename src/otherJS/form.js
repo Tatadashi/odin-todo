@@ -174,6 +174,30 @@ function setProjectOnCheck (checkbox, project) {
 function toggleProjectCheckMarks (checkbox, project, type = !project.finished) {
     project.finished = type;
     checkbox.checked = type;
+
+    const projectIcon = findProjectIcon(project);
+    toggleIconVisibility(projectIcon, type);
+}
+
+function findProjectIcon (project) {
+    const projectSidebarDivs = document.querySelectorAll('.sidebar-project-div');
+    let projectIcon;
+    projectSidebarDivs.forEach(div => {
+        let title = div.querySelector('h1').textContent;
+        if (title == project.title) {
+            projectIcon = div.querySelector('img');
+        }
+    });
+
+    return projectIcon;
+}
+
+function toggleIconVisibility (icon, visible = false) {
+    if (visible) {
+        icon.classList.add('visible');
+    } else {
+        icon.classList.remove('visible');
+    }
 }
 
 function toggleAllTodosCheckMarks (project) {

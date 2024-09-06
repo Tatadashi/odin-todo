@@ -25,11 +25,14 @@ function updateSidebar (projectList) {
 
         const myIcon = new Image();
         myIcon.src = Icon;
-        
+        if (project.finished) {
+            myIcon.classList.add('visible');
+        }
+       
         projectDiv.appendChild(myIcon);
 
         projectDiv.classList.add('sidebar-project-div');
-       
+
         sidebarProjects.appendChild(projectDiv);
     });
 }

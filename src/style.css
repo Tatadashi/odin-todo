@@ -14,8 +14,9 @@ body {
 }
 
 img {
-    max-height: 80px;
+    max-height: 30px;
     aspect-ratio: 1/1;
+    opacity: 0;
 }
 
 .modal {
@@ -89,6 +90,13 @@ form div {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.sidebar-project-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
 }
 
 .project {
