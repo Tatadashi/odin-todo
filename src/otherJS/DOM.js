@@ -1,4 +1,4 @@
-import Icon from './checkmark.png';
+import Icon from '../img/checkmark.png';
 import { projectList } from './default';
 import { findItemFromListByName, sortTodos } from './nonDOM';
 import { setAllFormEvents, setTodoCheckMark } from './form';
