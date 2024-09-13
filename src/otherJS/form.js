@@ -1,5 +1,5 @@
 import { projectList } from "./default";
-import { findItemFromListByName } from "./nonDOM";
+import { findItemFromListByName, storeProjectListToLocalStorage } from "./nonDOM";
 import { defaultProject } from "./default";
 
 function setAllFormEvents () {
@@ -159,7 +159,7 @@ function setProjectCheckMark () {
     if (project.finished) {
         projectCheckbox.checked = project.finished;
         toggleAllTodosCheckMarks(project);
-    }
+    } 
 
     setProjectOnCheck(projectCheckbox, project);
 }
@@ -209,13 +209,16 @@ function toggleAllTodosCheckMarks (project) {
     project.todoList.forEach(todo => {
         todo.finished = project.finished;
     });
+
+    storeProjectListToLocalStorage();
 }
 
 function setTodoCheckMark (todo, container) {
     const todoCheckbox = container.querySelector('input');
     todoCheckbox.checked = todo.finished;
 
-    setTodoOnCheck(todoCheckbox, todo);}
+    setTodoOnCheck(todoCheckbox, todo);
+}
 
 function setTodoOnCheck (checkbox, todo) {
     const projectCheckbox = document.getElementById('project-check-box');
@@ -230,6 +233,8 @@ function setTodoOnCheck (checkbox, todo) {
         } else if (checkIfAllTodosChecked(project)) {
             toggleProjectCheckMarks(projectCheckbox, project, true);
         }
+
+        storeProjectListToLocalStorage();
     });
 }
 

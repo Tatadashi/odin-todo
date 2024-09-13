@@ -27,6 +27,7 @@ function addTodo (projectName, todoName, description, dueDate, priority, note) {
     if (checkIfUniqueName(todoName, newTodoList)) {
         newTodoList.push(newTodo);
         chosenProject.changeProperty('todoList', newTodoList); 
+        storeProjectListToLocalStorage();
     } else {
         alert('Todo Creation Failed: name already exists');
     }
@@ -37,6 +38,7 @@ function addProject (projectName) {
 
     if (checkIfUniqueName(projectName, projectList)) {
         projectList.push(newProject);
+        storeProjectListToLocalStorage();
     } else {
         alert('Creation Failed: name already exists');
     }
@@ -49,6 +51,7 @@ function editProject (projectName) {
 
     if (checkIfUniqueName(projectName, projectList)) {
         project.title = projectName;
+        storeProjectListToLocalStorage();
     } else {
         alert('Edit Failed: name already exists');
     }
@@ -86,6 +89,8 @@ function editTodoInfo (todo, newTodoName, newDescription, newDueDate, newPriorit
     todo.changeProperty('dueDate', newDueDate);
     todo.changeProperty('priority', newPriority);
     todo.changeProperty('notes', newNote);
+
+    storeProjectListToLocalStorage();
 }
 
 function deleteProject (projectName) {
@@ -95,6 +100,8 @@ function deleteProject (projectName) {
     index = checkIfDefaultProject(project, index);
     
     projectList.splice(index, 1);
+
+    storeProjectListToLocalStorage();
 }
 
 function deleteTodo (projectName, todoName) {
@@ -103,6 +110,8 @@ function deleteTodo (projectName, todoName) {
     const index = project.todoList.indexOf(todo);
 
     project.todoList.splice(index, 1);
+
+    storeProjectListToLocalStorage();
 }
 
 //change index if default since don't want defaultProject to be deleted (but its content will change to resemble deleted project)
@@ -149,6 +158,8 @@ function sortTodos (project, sortCategory, sortOrder) {
     } else if (sortCategory == 'name') {
         project.todoList = sortByName(project.todoList, sortOrder);
     }
+
+    storeProjectListToLocalStorage();
 }
 
 function changePriorityPropertyToInteger (object) {
@@ -254,4 +265,62 @@ function sortByName (todoList, sortOrder) {
     return newTodoList;
 }
 
-export { findItemFromListByName, addTodo, addProject, deleteProject, deleteTodo, editTodo, editProject, sortTodos };
+function storeProjectListToLocalStorage () {
+    localStorage.clear();
+    projectList.forEach(project => {
+        const project_serialized = JSON.stringify(project);
+        localStorage.setItem(`${project.title}`, project_serialized);
+    });
+}
+
+//clears projectList except 1st project, reassigns defaultProject to it
+function clearProjectList () {
+    projectList.forEach(project => {
+        let index = projectList.indexOf(project)
+        index = checkIfDefaultProject(project, index);
+        projectList.splice(index, 1);
+    });
+}
+
+function convertLocalObjectsToSpecificObject (localObject, objectType, todoList=[]) {
+    if (objectType == 'project') {
+        let title = localObject.title;
+        let finished = localObject.finished;
+        
+        let returnProject = new Project(title, todoList, finished);
+        return returnProject;
+    } else {
+        let title = localObject.title;
+        let description = localObject.description;
+        let dueDate = localObject.dueDate;
+        let priority = localObject.priority;
+        let notes = localObject.notes;
+        let finished = localObject.finished;
+        
+        let returnTodo = new Todo(title, description, dueDate, priority, notes, finished);
+        return returnTodo;
+    }
+}
+
+function setProjectListToLocalStorage () {
+    const projects = {...localStorage};
+    const numberOfProjectsInLocal = Object.keys(projects).length;
+    clearProjectList();
+
+    for (let i = 0; i < numberOfProjectsInLocal; i++) {
+        let project_unserialized = JSON.parse(localStorage.getItem(`${Object.keys(projects)[i]}`));
+
+        let convertedTodoList = [];
+        project_unserialized.todoList.forEach(todo => {
+            convertedTodoList.push(convertLocalObjectsToSpecificObject(todo, 'todo'));
+        });
+        let convertedProject = convertLocalObjectsToSpecificObject(project_unserialized, 'project', convertedTodoList);
+
+        projectList.push(convertedProject);
+    }
+
+    let index = checkIfDefaultProject(projectList[0], 0);
+    projectList.splice(index, 1);
+}
+
+export { findItemFromListByName, addTodo, addProject, deleteProject, deleteTodo, editTodo, editProject, sortTodos, storeProjectListToLocalStorage, setProjectListToLocalStorage };

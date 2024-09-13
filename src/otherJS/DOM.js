@@ -1,10 +1,16 @@
 import Icon from '../img/checkmark.png';
 import { projectList } from './default';
-import { findItemFromListByName, sortTodos } from './nonDOM';
+import { findItemFromListByName, sortTodos, storeProjectListToLocalStorage, setProjectListToLocalStorage } from './nonDOM';
 import { setAllFormEvents, setTodoCheckMark } from './form';
 
 //modal and tab events
 function setDOMEvents () {
+    if (localStorage.length == 0) {
+        storeProjectListToLocalStorage();
+    } else {
+        setProjectListToLocalStorage();
+    }
+
     setAllFormEvents();
     updateSidebar(projectList);
 }
@@ -14,7 +20,7 @@ function updateSidebar (projectList) {
     //first child of #sidebar is where projects located
     const sidebarProjects = document.getElementById('sidebar').children[0];
     sidebarProjects.innerHTML = '';
-    
+
     projectList.forEach(project => {
 
         const projectDiv = document.createElement('div');
@@ -44,8 +50,25 @@ function updateContent (projectName) {
     const projectTitle = document.getElementById('project-title');
     projectTitle.textContent = project.title;
 
+    fixWeirdBug(project);
     addSortButtonFunctionalty(project);
     generateTodos(project);
+}
+
+//hard coded fix bug for when 1st project on refresh shows not finished even if all the todos are
+function fixWeirdBug (project) {
+    if (!project.finished) {
+        let finishedCounter = 0;
+        project.todoList.forEach(todo => {
+            if (todo.finished) {
+                finishedCounter++;
+            }
+        });
+
+        if (finishedCounter == project.todoList.length) {
+            project.finished = true;
+        }
+    }
 }
 
 function generateTodos (project) {
